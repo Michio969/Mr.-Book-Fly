@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react"
 import { loadStripe } from "@stripe/stripe-js"
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ShieldCheck, X } from "lucide-react"
 import { toast } from "sonner"
@@ -125,21 +127,43 @@ export function PaymentModal({ isOpen, onClose, onSuccess, amount, itemName }: P
         </CardHeader>
         
         <CardContent className="pt-6 space-y-6">
-          {/* Razorpay Button */}
-          <Button 
-            className="w-full bg-[#3395FF] hover:bg-[#2277DD] text-white h-14 text-lg font-bold shadow-md flex items-center justify-center gap-2"
-            asChild
-          >
-            <a href="https://rzp.io/rzp/0pPNbXD" target="_blank" rel="noopener noreferrer">
-              Pay with UPI / Razorpay
-            </a>
-          </Button>
+          {/* UPI QR Code Section */}
+          <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 text-center space-y-4">
+            <div className="font-bold text-slate-900 text-sm">UPI QR Code Payment</div>
+            <div className="flex justify-center">
+              <img 
+                src="/MY UPI.JPEG" 
+                alt="UPI QR Code" 
+                className="w-40 h-40 object-contain border border-slate-200 rounded-lg bg-white"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            <p className="text-xs font-medium text-slate-700">
+              Scan to pay via UPI / Google Pay / PhonePe / Paytm
+            </p>
+            
+            <div className="space-y-2 text-left pt-2">
+              <Label htmlFor="modalTransactionId" className="text-xs">UPI Transaction ID</Label>
+              <Input 
+                id="modalTransactionId" 
+                placeholder="Enter 12-digit Ref No." 
+                className="h-9 text-sm"
+                required
+              />
+              <Button 
+                onClick={() => onSuccess()}
+                className="w-full bg-green-600 hover:bg-green-700 text-white h-9 text-sm font-bold"
+              >
+                Confirm UPI Payment
+              </Button>
+            </div>
+          </div>
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <span className="w-full border-t border-slate-200"></span>
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
+            <div className="relative flex justify-center text-[10px] uppercase">
               <span className="bg-white px-2 text-slate-500">Or pay with Card</span>
             </div>
           </div>

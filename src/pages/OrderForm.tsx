@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Plane, Building, Calendar as CalendarIcon, MapPin, ShieldCheck, CheckCircle2, FileText } from "lucide-react"
+import { Plane, Building, Calendar as CalendarIcon, MapPin, ShieldCheck, CheckCircle2, FileText, MessageCircle, X } from "lucide-react"
 import { toast } from "sonner"
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js"
 import { generatePDF } from "@/lib/api"
@@ -12,6 +12,8 @@ import { generatePDF } from "@/lib/api"
 export function OrderForm() {
   const [isProcessing, setIsProcessing] = useState(false)
   const [showPayment, setShowPayment] = useState(false)
+  const [showSuccessModal, setShowSuccessModal] = useState(false)
+  const [transactionId, setTransactionId] = useState("")
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -21,6 +23,14 @@ export function OrderForm() {
     destinationCity: "",
     serviceType: "flight", // flight, hotel, both
   })
+
+  const whatsappNumber = "+447877679344"
+  const whatsappLink = `https://wa.me/${whatsappNumber}`
+
+  const getWhatsAppMessage = () => {
+    const msg = `Hello! I want to book a dummy ticket. My details are: Name: ${formData.fullName || "[name]"} | Travel Date: ${formData.departureDate || "[date]"} | From: ${formData.departureCity || "[city]"} | To: ${formData.destinationCity || "[city]"} | Service: ${formData.serviceType || "[service type]"}`
+    return encodeURIComponent(msg)
+  }
 
   const prices = {
     flight: 3,
@@ -46,9 +56,9 @@ export function OrderForm() {
     setShowPayment(true)
   }
 
-  const handlePaymentSuccess = async (details: any) => {
+  const handlePaymentSuccess = async (details?: any) => {
     setIsProcessing(true)
-    toast.success("Payment successful! Generating your documents...")
+    // toast.success("Payment successful! Generating your documents...") // Replaced by modal
 
     try {
       if (formData.serviceType === "flight" || formData.serviceType === "both") {
@@ -72,13 +82,22 @@ export function OrderForm() {
         })
       }
 
-      toast.success("Your documents are downloading.")
+      setShowSuccessModal(true)
       setShowPayment(false)
     } catch (error) {
       toast.error("Failed to generate documents. Please contact support.")
     } finally {
       setIsProcessing(false)
     }
+  }
+
+  const handleUPISubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!transactionId) {
+      toast.error("Please enter your UPI Transaction ID.")
+      return
+    }
+    handlePaymentSuccess()
   }
 
   return (
@@ -188,9 +207,22 @@ export function OrderForm() {
                       </RadioGroup>
                     </div>
 
-                    <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white h-12 text-lg">
-                      Proceed to Payment
-                    </Button>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <Button type="submit" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white h-12 text-lg">
+                        Proceed to Payment
+                      </Button>
+                      <Button 
+                        type="button" 
+                        variant="outline" 
+                        className="flex-1 border-green-500 text-green-600 hover:bg-green-50 h-12 text-lg font-semibold flex items-center justify-center gap-2"
+                        asChild
+                      >
+                        <a href={`${whatsappLink}?text=${getWhatsAppMessage()}`} target="_blank" rel="noopener noreferrer">
+                          <MessageCircle className="w-5 h-5" />
+                          Book via WhatsApp
+                        </a>
+                      </Button>
+                    </div>
                   </form>
                 ) : (
                   <div className="space-y-8 py-4">
@@ -199,16 +231,42 @@ export function OrderForm() {
                       <p className="text-slate-600">Total Amount: <span className="text-blue-600 font-bold">${prices[formData.serviceType as keyof typeof prices]}</span></p>
                     </div>
 
-                    <div className="max-w-sm mx-auto space-y-6">
-                      {/* Razorpay Button */}
-                      <Button 
-                        className="w-full bg-[#3395FF] hover:bg-[#2277DD] text-white h-14 text-lg font-bold shadow-md flex items-center justify-center gap-2"
-                        asChild
-                      >
-                        <a href="https://rzp.io/rzp/0pPNbXD" target="_blank" rel="noopener noreferrer">
-                          Pay with UPI / Razorpay
-                        </a>
-                      </Button>
+                    <div className="max-w-sm mx-auto space-y-8">
+                      {/* UPI QR Code Section */}
+                      <div className="bg-white p-6 rounded-xl border-2 border-slate-100 shadow-sm text-center space-y-4">
+                        <div className="font-bold text-slate-900">UPI QR Code Payment</div>
+                        <div className="flex justify-center">
+                          <img 
+                            src="/MY UPI.JPEG" 
+                            alt="UPI QR Code" 
+                            className="w-48 h-48 object-contain border border-slate-200 rounded-lg"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                        <p className="text-sm font-medium text-slate-700">
+                          Scan to pay via UPI / Google Pay / PhonePe / Paytm
+                        </p>
+                        
+                        <form onSubmit={handleUPISubmit} className="space-y-4 pt-4 border-t border-slate-100">
+                          <div className="space-y-2 text-left">
+                            <Label htmlFor="transactionId">UPI Transaction ID</Label>
+                            <Input 
+                              id="transactionId" 
+                              placeholder="Enter 12-digit Ref No." 
+                              value={transactionId}
+                              onChange={(e) => setTransactionId(e.target.value)}
+                              required
+                            />
+                          </div>
+                          <Button 
+                            type="submit" 
+                            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold"
+                            disabled={isProcessing}
+                          >
+                            {isProcessing ? "Verifying..." : "Confirm UPI Payment"}
+                          </Button>
+                        </form>
+                      </div>
 
                       <div className="relative">
                         <div className="absolute inset-0 flex items-center">
@@ -275,7 +333,7 @@ export function OrderForm() {
                   </li>
                   <li className="flex items-start">
                     <CheckCircle2 className="w-4 h-4 mr-2 mt-0.5 text-green-400 shrink-0" />
-                    <span>Secure PayPal Payment</span>
+                    <span>Secure Payment Options</span>
                   </li>
                 </ul>
               </CardContent>
@@ -285,7 +343,7 @@ export function OrderForm() {
               <h4 className="font-bold text-blue-900 mb-2">Need Help?</h4>
               <p className="text-sm text-blue-700 mb-4">Contact our support team on WhatsApp for instant assistance.</p>
               <Button className="w-full bg-green-500 hover:bg-green-600 text-white" asChild>
-                <a href="https://wa.me/18001234567" target="_blank" rel="noopener noreferrer">
+                <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
                   Chat with Us
                 </a>
               </Button>
@@ -293,6 +351,43 @@ export function OrderForm() {
           </div>
         </div>
       </div>
+
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <Card className="w-full max-w-md bg-white shadow-2xl relative animate-in fade-in zoom-in duration-300">
+            <button 
+              onClick={() => setShowSuccessModal(false)}
+              className="absolute right-4 top-4 text-slate-400 hover:text-slate-600 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <CardHeader className="text-center pb-2">
+              <div className="mx-auto w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
+                <CheckCircle2 className="w-10 h-10" />
+              </div>
+              <CardTitle className="text-2xl text-slate-900">Thank you for your order!</CardTitle>
+            </CardHeader>
+            <CardContent className="text-center space-y-6">
+              <p className="text-slate-600 text-lg leading-relaxed">
+                ✅ Your booking is confirmed. You will receive your ticket within 10-20 minutes on your email/WhatsApp. For any help contact us on WhatsApp.
+              </p>
+              
+              <Button className="w-full bg-green-500 hover:bg-green-600 text-white h-14 text-lg font-bold flex items-center justify-center gap-2" asChild>
+                <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
+                  <MessageCircle className="w-6 h-6" />
+                  Chat with us on WhatsApp
+                </a>
+              </Button>
+            </CardContent>
+            <CardFooter className="justify-center border-t border-slate-100 pt-4">
+              <Button variant="ghost" onClick={() => setShowSuccessModal(false)}>
+                Close
+              </Button>
+            </CardFooter>
+          </Card>
+        </div>
+      )}
     </div>
   )
 }

@@ -70,8 +70,8 @@ export function Contact() {
                   <div>
                     <h4 className="font-semibold text-slate-900">WhatsApp Support</h4>
                     <p className="text-slate-600 mb-2">Fastest way to get help. Available 24/7.</p>
-                    <a href="https://wa.me/18001234567" className="text-blue-600 font-medium hover:underline">
-                      +1 (800) 123-4567
+                    <a href="https://wa.me/447877679344" className="text-blue-600 font-medium hover:underline">
+                      +44 7877 679344
                     </a>
                   </div>
                 </div>
@@ -111,7 +111,7 @@ export function Contact() {
                 If your visa appointment is within 24 hours, please use our WhatsApp support line for immediate priority processing.
               </p>
               <Button className="w-full bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold" asChild>
-                <a href="https://wa.me/18001234567" target="_blank" rel="noopener noreferrer">
+                <a href="https://wa.me/447877679344" target="_blank" rel="noopener noreferrer">
                   Chat on WhatsApp Now
                 </a>
               </Button>
