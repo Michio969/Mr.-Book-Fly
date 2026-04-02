@@ -25,8 +25,16 @@ export function Layout() {
       <div className="bg-slate-900 text-slate-200 py-2 text-xs sm:text-sm">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center space-x-4">
-            <span className="flex items-center"><PhoneCall className="w-3 h-3 mr-1" /> +1 (800) 123-4567</span>
-            <span className="hidden sm:inline">support@mrbookandfly.com</span>
+            <a 
+              href="https://wa.me/447877679344" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center hover:text-green-400 transition-colors"
+            >
+              <MessageCircle className="w-4 h-4 mr-1.5 text-green-500" />
+              <span className="font-medium">Chat with us:</span>
+              <span className="ml-1">+44 7877 679344</span>
+            </a>
           </div>
           <div className="flex space-x-4">
             <span>100% Embassy Acceptable</span>
@@ -168,7 +176,7 @@ export function Layout() {
 
       {/* Floating WhatsApp Button */}
       <a
-        href="https://wa.me/18001234567"
+        href="https://wa.me/447877679344"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition-transform hover:scale-110 flex items-center justify-center"
