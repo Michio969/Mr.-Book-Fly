@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { loadStripe } from "@stripe/stripe-js"
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 import { Button } from "@/components/ui/button"
@@ -7,7 +7,7 @@ import { ShieldCheck, X } from "lucide-react"
 import { toast } from "sonner"
 
 // Use a dummy key if env var is missing to allow the UI to render in demo mode
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || "pk_test_TYooMQauvdEDq54NiTphI7jx")
+const stripePromise = loadStripe((import.meta as any).env.VITE_STRIPE_PUBLISHABLE_KEY || "pk_test_TYooMQauvdEDq54NiTphI7jx")
 
 interface PaymentModalProps {
   isOpen: boolean
@@ -118,13 +118,32 @@ export function PaymentModal({ isOpen, onClose, onSuccess, amount, itemName }: P
         </button>
         
         <CardHeader className="border-b border-slate-100 pb-6">
-          <CardTitle className="text-2xl text-slate-900">Complete Payment</CardTitle>
+          <CardTitle className="text-2xl text-slate-900">Choose Payment Method</CardTitle>
           <CardDescription>
             You are paying for: <strong className="text-slate-700">{itemName}</strong>
           </CardDescription>
         </CardHeader>
         
-        <CardContent className="pt-6">
+        <CardContent className="pt-6 space-y-6">
+          {/* Razorpay Button */}
+          <Button 
+            className="w-full bg-[#3395FF] hover:bg-[#2277DD] text-white h-14 text-lg font-bold shadow-md flex items-center justify-center gap-2"
+            asChild
+          >
+            <a href="https://rzp.io/rzp/0pPNbXD" target="_blank" rel="noopener noreferrer">
+              Pay with UPI / Razorpay
+            </a>
+          </Button>
+
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-slate-200"></span>
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-white px-2 text-slate-500">Or pay with Card</span>
+            </div>
+          </div>
+
           {clientSecret ? (
             <Elements options={{ clientSecret, appearance: { theme: 'stripe' } }} stripe={stripePromise}>
               <CheckoutForm onSuccess={onSuccess} amount={amount} itemName={itemName} isSimulated={isSimulated} />

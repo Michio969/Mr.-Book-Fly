@@ -6,9 +6,9 @@ import { Link } from "react-router-dom"
 export function Pricing() {
   const plans = [
     {
-      name: "Flight Only",
-      price: "$15",
-      description: "Perfect for short trips and simple visa applications.",
+      name: "Dummy Flight Ticket",
+      price: "$3",
+      description: "Verifiable flight itinerary with valid PNR.",
       features: [
         "Verifiable Flight Itinerary",
         "Valid PNR Code",
@@ -16,38 +16,37 @@ export function Pricing() {
         "Valid for 48-72 hours",
         "24/7 Email Support"
       ],
-      link: "/flight-reservation",
+      link: "/order-form",
       popular: false
     },
     {
-      name: "Flight + Hotel",
-      price: "$25",
-      description: "The most common package for Schengen and US visas.",
+      name: "Hotel Booking",
+      price: "$3",
+      description: "Confirmed hotel reservation for visa application.",
+      features: [
+        "Confirmed Hotel Booking",
+        "Valid Booking Reference",
+        "Instant PDF Delivery",
+        "Safe for Embassy Checks",
+        "Priority Support"
+      ],
+      link: "/order-form",
+      popular: false
+    },
+    {
+      name: "Both Together",
+      price: "$5",
+      description: "Complete flight and hotel package for your visa.",
       features: [
         "Verifiable Flight Itinerary",
         "Confirmed Hotel Booking",
         "Valid PNR & Booking Codes",
         "Instant PDF Delivery",
         "Valid for up to 14 days",
-        "Priority Support"
-      ],
-      link: "/flight-reservation",
-      popular: true
-    },
-    {
-      name: "Complete Package",
-      price: "$45",
-      description: "Everything you need for a bulletproof visa application.",
-      features: [
-        "Verifiable Flight Itinerary",
-        "Confirmed Hotel Booking",
-        "Custom Invitation Letter",
-        "Travel Insurance Quote",
-        "Instant PDF Delivery",
         "WhatsApp Priority Support"
       ],
-      link: "/flight-reservation",
-      popular: false
+      link: "/order-form",
+      popular: true
     }
   ]
 

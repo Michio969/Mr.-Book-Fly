@@ -19,6 +19,8 @@ import { TermsOfService } from "./pages/TermsOfService"
 import { PrivacyPolicy } from "./pages/PrivacyPolicy"
 import { RefundPolicy } from "./pages/RefundPolicy"
 
+import { OrderForm } from "./pages/OrderForm"
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -29,6 +31,7 @@ export default function App() {
           <Route path="flight-reservation" element={<FlightReservation />} />
           <Route path="event-booking" element={<EventBooking />} />
           <Route path="invitation-letter" element={<InvitationLetter />} />
+          <Route path="order-form" element={<OrderForm />} />
           <Route path="visa-support" element={<VisaSupport />} />
           <Route path="pricing" element={<Pricing />} />
           <Route path="about" element={<AboutUs />} />

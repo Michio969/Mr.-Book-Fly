@@ -60,7 +60,7 @@ export function Layout() {
             <Link to="/dashboard">
               <Button variant="ghost" className="text-slate-600">Login</Button>
             </Link>
-            <Link to="/flight-reservation">
+            <Link to="/order-form">
               <Button className="bg-blue-600 hover:bg-blue-700 text-white">Book Now</Button>
             </Link>
           </div>
@@ -93,7 +93,7 @@ export function Layout() {
               <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
                 <Button variant="outline" className="w-full">Login</Button>
               </Link>
-              <Link to="/flight-reservation" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link to="/order-form" onClick={() => setIsMobileMenuOpen(false)}>
                 <Button className="w-full bg-blue-600 text-white">Book Now</Button>
               </Link>
             </div>

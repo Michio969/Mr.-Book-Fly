@@ -1,4 +1,4 @@
-import { useState } from "react"
+import React, { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -149,7 +149,7 @@ export function HotelBooking() {
               <CardContent className="pt-4 space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="text-slate-600">Hotel Reservation (Dummy)</span>
-                  <span className="font-semibold text-slate-900">$15.00</span>
+                  <span className="font-semibold text-slate-900">$3.00</span>
                 </div>
                 <div className="flex justify-between items-center text-sm text-green-600">
                   <span>Instant Delivery</span>
@@ -157,7 +157,7 @@ export function HotelBooking() {
                 </div>
                 <div className="border-t border-slate-100 pt-4 flex justify-between items-center font-bold text-lg">
                   <span>Total</span>
-                  <span className="text-blue-600">$15.00</span>
+                  <span className="text-blue-600">$3.00</span>
                 </div>
               </CardContent>
             </Card>
@@ -200,7 +200,7 @@ export function HotelBooking() {
         isOpen={isPaymentModalOpen} 
         onClose={() => setIsPaymentModalOpen(false)} 
         onSuccess={handlePaymentSuccess} 
-        amount={15.00} 
+        amount={3.00} 
         itemName="Hotel Booking" 
       />
     </div>

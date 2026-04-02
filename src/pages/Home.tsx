@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { motion } from "motion/react"
 import { ShieldCheck, Clock, FileText, CheckCircle2, Star, Plane, Building, Calendar, Mail, ArrowRight, Lock } from "lucide-react"
@@ -51,7 +51,7 @@ export function Home() {
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-                <Link to="/flight-reservation">
+                <Link to="/order-form">
                   <Button size="lg" className="w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold text-lg h-14 px-8">
                     Book Now
                     <ArrowRight className="ml-2 w-5 h-5" />
@@ -105,22 +105,22 @@ export function Home() {
                 title: "Flight Reservations",
                 description: "Verifiable flight itineraries with PNR for visa applications. Not actual tickets.",
                 icon: <Plane className="w-8 h-8 text-blue-600" />,
-                link: "/flight-reservation",
-                price: "From $15"
+                link: "/order-form",
+                price: "From $3"
               },
               {
                 title: "Hotel Bookings",
                 description: "Confirmed hotel reservations in your destination country. Safe for embassy checks.",
                 icon: <Building className="w-8 h-8 text-blue-600" />,
-                link: "/hotel-booking",
-                price: "From $15"
+                link: "/order-form",
+                price: "From $3"
               },
               {
-                title: "Event Bookings",
-                description: "Concert, festival, or exhibition tickets to prove the purpose of your visit.",
+                title: "Both Together",
+                description: "Complete flight and hotel package for your visa at a discounted price.",
                 icon: <Calendar className="w-8 h-8 text-blue-600" />,
-                link: "/event-booking",
-                price: "From $20"
+                link: "/order-form",
+                price: "From $5"
               },
               {
                 title: "Invitation Letters",
@@ -208,7 +208,7 @@ export function Home() {
             Our automated system generates your verifiable bookings instantly. Don't risk your visa application with unverified documents.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <Link to="/flight-reservation">
+            <Link to="/order-form">
               <Button size="lg" className="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold text-lg h-14 px-8 w-full sm:w-auto">
                 Start Booking Now
               </Button>
@@ -216,6 +216,57 @@ export function Home() {
             <span className="text-blue-200 text-sm">
               * Limited-time pricing available today
             </span>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-slate-900 mb-4">What Our Clients Say</h2>
+            <p className="text-slate-600">Trusted by thousands of travelers worldwide.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                name: "Anjali Sharma",
+                location: "New Delhi, India",
+                text: "The dummy ticket was accepted instantly for my Schengen visa. Saved me so much money and stress!",
+                avatar: "AS"
+              },
+              {
+                name: "Kwame Mensah",
+                location: "Accra, Ghana",
+                text: "Fast and reliable service. I got my hotel booking in minutes and my UK visa was approved without issues.",
+                avatar: "KM"
+              },
+              {
+                name: "Elena Rodriguez",
+                location: "Sao Paulo, Brazil",
+                text: "Excellent support! They helped me with a custom invitation letter that was perfect for my US visa application.",
+                avatar: "ER"
+              }
+            ].map((testimonial, index) => (
+              <Card key={index} className="border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+                <CardHeader className="flex flex-row items-center gap-4 pb-4">
+                  <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold">
+                    {testimonial.avatar}
+                  </div>
+                  <div>
+                    <CardTitle className="text-lg">{testimonial.name}</CardTitle>
+                    <CardDescription>{testimonial.location}</CardDescription>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex text-amber-400 mb-3">
+                    {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
+                  </div>
+                  <p className="text-slate-600 italic">"{testimonial.text}"</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
