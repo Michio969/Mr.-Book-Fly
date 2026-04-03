@@ -8,7 +8,7 @@ export function Pricing() {
     { label: "24–36 Hours", price_usd: "$3", price_inr: "₹299", features: ["Verifiable Flight Itinerary", "Valid PNR Code", "Instant PDF Delivery", "24–36 hr validity", "Email Support"] },
     { label: "96 Hours", price_usd: "$9", price_inr: "₹999", features: ["Verifiable Flight Itinerary", "Valid PNR Code", "Instant PDF Delivery", "4 Day validity", "Priority Support"], popular: true },
     { label: "7 Days", price_usd: "$14", price_inr: "₹1299", features: ["Verifiable Flight Itinerary", "Valid PNR Code", "Instant PDF Delivery", "7 Day validity", "WhatsApp Support"] },
-    { label: "10 Days", price_usd: "$20", price_inr: "₹1599", features: ["Verifiable Flight Itinerary", "Valid PNR Code", "Instant PDF Delivery", "10 Day validity", "WhatsApp Priority Support"] },
+    { label: "1 Month", price_usd: "$20", price_inr: "₹1599", features: ["Verifiable Flight Itinerary", "Valid PNR Code", "Instant PDF Delivery", "1 Month validity", "WhatsApp Priority Support"] },
   ]
 
   const otherPlans = [

@@ -17,6 +17,7 @@ export function EventBooking() {
   const [formData, setFormData] = useState({
     eventName: "", eventDate: "", location: "",
     firstName: "", lastName: "", email: "", phone: "",
+    passport: "", dob: "", gender: "", nationality: "",
   })
 
   const PRICE_USD = 12
@@ -40,7 +41,7 @@ export function EventBooking() {
     e.preventDefault()
     if (!transactionId) { toast.error("Please enter UPI Transaction ID."); return }
     setIsProcessing(true)
-    const msg = `Hello! Event Booking:\nName: ${formData.firstName} ${formData.lastName}\nEvent: ${formData.eventName}\nDate: ${formData.eventDate}\nLocation: ${formData.location}\nTotal: $${PRICE_USD} / ₹${PRICE_INR}\nUPI Ref: ${transactionId}\nEmail: ${formData.email}\nPhone: ${formData.phone}`
+    const msg = `Hello! Event Booking:\nName: ${formData.firstName} ${formData.lastName}\nEvent: ${formData.eventName}\nDate: ${formData.eventDate}\nLocation: ${formData.location}\nTotal: $${PRICE_USD} / ₹${PRICE_INR}\nUPI Ref: ${transactionId}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nPassport: ${formData.passport || "N/A"}\nDOB: ${formData.dob || "N/A"}\nGender: ${formData.gender || "N/A"}\nNationality: ${formData.nationality || "N/A"}`
     setTimeout(() => {
       setIsProcessing(false)
       window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank")
@@ -120,6 +121,31 @@ export function EventBooking() {
                         <div className="space-y-2">
                           <Label htmlFor="phone">WhatsApp Number</Label>
                           <Input id="phone" type="tel" placeholder="+91 9999999999" value={formData.phone} onChange={handleInputChange} />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <Label htmlFor="passport">Passport Number</Label>
+                          <Input id="passport" placeholder="e.g. A1234567" value={formData.passport} onChange={handleInputChange} />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="dob">Date of Birth</Label>
+                          <Input id="dob" type="date" value={formData.dob} onChange={handleInputChange} />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <Label htmlFor="gender">Gender</Label>
+                          <select id="gender" value={formData.gender} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData(p => ({ ...p, gender: e.target.value }))} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                            <option value="">Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="nationality">Nationality</Label>
+                          <Input id="nationality" placeholder="e.g. Indian, British" value={formData.nationality} onChange={handleInputChange} />
                         </div>
                       </div>
                     </div>
