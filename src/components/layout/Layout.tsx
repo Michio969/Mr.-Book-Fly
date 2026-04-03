@@ -43,7 +43,7 @@ export function Layout() {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2 text-blue-700">
             <Plane className="h-6 w-6" />
-            <span className="text-xl font-bold tracking-tight">Mr. Book & Mrs. Fly</span>
+            <span className="text-xl font-bold tracking-tight">Mr Book & Fly</span>
           </Link>
 
           {/* Desktop Nav */}
@@ -101,7 +101,7 @@ export function Layout() {
           <div>
             <Link to="/" className="flex items-center space-x-2 text-white mb-4">
               <Plane className="h-6 w-6" />
-              <span className="text-xl font-bold">Mr. Book & Mrs. Fly</span>
+              <span className="text-xl font-bold">Mr Book & Fly</span>
             </Link>
             <p className="text-sm text-slate-400 mb-4">Providing verified, embassy-acceptable dummy bookings for visas. Fast, secure, and reliable.</p>
             <p className="text-xs text-slate-500">Disclaimer: Bookings are for visa purposes only.</p>
@@ -134,7 +134,7 @@ export function Layout() {
           </div>
         </div>
         <div className="container mx-auto px-4 mt-12 pt-8 border-t border-slate-800 text-sm text-center text-slate-500">
-          &copy; {new Date().getFullYear()} Mr. Book & Mrs. Fly. All rights reserved.
+          &copy; {new Date().getFullYear()} Mr Book & Fly. All rights reserved.
         </div>
       </footer>
 
