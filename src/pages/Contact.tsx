@@ -83,8 +83,8 @@ export function Contact() {
                   <div>
                     <h4 className="font-semibold text-slate-900">Email Support</h4>
                     <p className="text-slate-600 mb-2">For detailed inquiries and document issues.</p>
-                    <a href="mailto:support@mrbookandfly.com" className="text-blue-600 font-medium hover:underline">
-                      support@mrbookandfly.com
+                    <a href="mailto:92sweetflower@gmail.com" className="text-blue-600 font-medium hover:underline">
+                      92sweetflower@gmail.com
                     </a>
                   </div>
                 </div>
