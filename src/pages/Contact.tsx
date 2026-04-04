@@ -96,9 +96,9 @@ export function Contact() {
                   <div>
                     <h4 className="font-semibold text-slate-900">Office Location</h4>
                     <p className="text-slate-600">
-                      123 Business Avenue, Suite 400<br />
-                      New York, NY 10001<br />
-                      United States
+                      Virtual Office<br />
+                      London<br />
+                      United Kingdom
                     </p>
                   </div>
                 </div>
