@@ -10,6 +10,8 @@ import { HotelBooking } from "./pages/HotelBooking"
 import { FlightReservation } from "./pages/FlightReservation"
 import { EventBooking } from "./pages/EventBooking"
 import { InvitationLetter } from "./pages/InvitationLetter"
+import HealthInsurance from "./pages/HealthInsurance"
+import SlotBooking from "./pages/SlotBooking"
 import { VisaSupport } from "./pages/VisaSupport"
 import { Pricing } from "./pages/Pricing"
 import { AboutUs } from "./pages/AboutUs"
@@ -31,6 +33,8 @@ export default function App() {
           <Route path="flight-reservation" element={<FlightReservation />} />
           <Route path="event-booking" element={<EventBooking />} />
           <Route path="invitation-letter" element={<InvitationLetter />} />
+          <Route path="/health-insurance" element={<HealthInsurance />} />
+          <Route path="/slot-booking" element={<SlotBooking />} />
           <Route path="order-form" element={<OrderForm />} />
           <Route path="visa-support" element={<VisaSupport />} />
           <Route path="pricing" element={<Pricing />} />
