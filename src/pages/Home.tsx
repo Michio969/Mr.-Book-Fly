@@ -220,7 +220,76 @@ export function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+
+      {/* Additional Services Section */}
+      <section className="py-20 bg-gradient-to-br from-slate-900 to-blue-900 text-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">More Visa Support Services</h2>
+            <p className="text-slate-300 max-w-2xl mx-auto text-lg">
+              Beyond bookings — we provide comprehensive documentation to make your visa application bulletproof.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mb-12">
+            {[
+              {
+                emoji: "📝",
+                title: "Cover Letter",
+                desc: "Professionally written cover letters tailored to your visa type, destination and purpose of visit. Embassy-ready language.",
+                whatsapp: "I need a Cover Letter for my visa application.",
+              },
+              {
+                emoji: "🗺️",
+                title: "Travel Plan / Itinerary",
+                desc: "Detailed day-by-day travel itineraries showing your planned activities, destinations and accommodation.",
+                whatsapp: "I need a Travel Itinerary for my visa application.",
+              },
+              {
+                emoji: "📂",
+                title: "Document Preparation",
+                desc: "Complete visa document checklist, file organisation and review service to ensure nothing is missed.",
+                whatsapp: "I need help with Document Preparation for my visa.",
+              },
+              {
+                emoji: "🌍",
+                title: "Other Visa Services",
+                desc: "Invitation letters, sponsorship letters, NOC letters, bank statement guidance and more — just ask us.",
+                whatsapp: "I need other visa support services. Please guide me.",
+              },
+            ].map((service, i) => (
+              <div key={i} className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/15 transition-colors border border-white/10">
+                <div className="text-4xl mb-4">{service.emoji}</div>
+                <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                <p className="text-slate-300 text-sm mb-5 leading-relaxed">{service.desc}</p>
+                <a
+                  href={`https://wa.me/447877679344?text=${encodeURIComponent("Hi! " + service.whatsapp)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors"
+                >
+                  💬 Enquire on WhatsApp →
+                </a>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="https://wa.me/447877679344" target="_blank" rel="noopener noreferrer">
+              <button className="bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold text-lg h-14 px-8 rounded-lg transition-colors">
+                💬 Chat on WhatsApp
+              </button>
+            </a>
+            <a href="mailto:92sweetflower@gmail.com">
+              <button className="border border-white text-white hover:bg-white hover:text-slate-900 font-bold text-lg h-14 px-8 rounded-lg transition-colors">
+                📧 Email Us
+              </button>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">

@@ -14,7 +14,10 @@ export function Layout() {
     { name: "Hotels", path: "/hotel-booking" },
     { name: "Flights", path: "/flight-reservation" },
     { name: "Events", path: "/event-booking" },
+    { name: "Health Insurance", path: "/health-insurance" },
+    { name: "Slot Booking", path: "/slot-booking" },
     { name: "Pricing", path: "/pricing" },
+    { name: "Deals", path: "/valuable-deals" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
   ]
@@ -47,9 +50,9 @@ export function Layout() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center space-x-6">
+          <nav className="hidden md:flex items-center space-x-5">
             {navLinks.map((link) => (
-              <Link key={link.name} to={link.path} className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">
+              <Link key={link.name} to={link.path} className={`text-sm font-medium transition-colors ${location.pathname === link.path ? "text-blue-600" : "text-slate-600 hover:text-blue-600"}`}>
                 {link.name}
               </Link>
             ))}
@@ -112,7 +115,9 @@ export function Layout() {
               <li><Link to="/flight-reservation" className="hover:text-white transition-colors">Flight Reservations</Link></li>
               <li><Link to="/hotel-booking" className="hover:text-white transition-colors">Hotel Bookings</Link></li>
               <li><Link to="/event-booking" className="hover:text-white transition-colors">Event Bookings</Link></li>
-              <li><Link to="/invitation-letter" className="hover:text-white transition-colors">Invitation Letters</Link></li>
+              <li><Link to="/health-insurance" className="hover:text-white transition-colors">Health Insurance</Link></li>
+              <li><Link to="/slot-booking" className="hover:text-white transition-colors">Slot Booking</Link></li>
+              <li><Link to="/valuable-deals" className="hover:text-white transition-colors">Valuable Deals</Link></li>
             </ul>
           </div>
           <div>

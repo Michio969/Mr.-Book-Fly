@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Layout } from "./components/layout/Layout"
 import { Home } from "./pages/Home"
@@ -12,6 +7,7 @@ import { EventBooking } from "./pages/EventBooking"
 import { InvitationLetter } from "./pages/InvitationLetter"
 import HealthInsurance from "./pages/HealthInsurance"
 import SlotBooking from "./pages/SlotBooking"
+import ValuableDeals from "./pages/ValuableDeals"
 import { VisaSupport } from "./pages/VisaSupport"
 import { Pricing } from "./pages/Pricing"
 import { AboutUs } from "./pages/AboutUs"
@@ -20,7 +16,6 @@ import { Dashboard } from "./pages/Dashboard"
 import { TermsOfService } from "./pages/TermsOfService"
 import { PrivacyPolicy } from "./pages/PrivacyPolicy"
 import { RefundPolicy } from "./pages/RefundPolicy"
-
 import { OrderForm } from "./pages/OrderForm"
 
 export default function App() {
@@ -35,6 +30,7 @@ export default function App() {
           <Route path="invitation-letter" element={<InvitationLetter />} />
           <Route path="/health-insurance" element={<HealthInsurance />} />
           <Route path="/slot-booking" element={<SlotBooking />} />
+          <Route path="/valuable-deals" element={<ValuableDeals />} />
           <Route path="order-form" element={<OrderForm />} />
           <Route path="visa-support" element={<VisaSupport />} />
           <Route path="pricing" element={<Pricing />} />
