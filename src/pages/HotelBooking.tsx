@@ -46,8 +46,7 @@ export function HotelBooking() {
     return Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)))
   }, [formData.checkin, formData.checkout])
 
-  const totalINR = Math.max(299, 299 + (nights > 1 ? (nights - 1) * 149 : 0))
-  const totalUSD = Math.max(2, 2 + (nights > 1 ? (nights - 1) * 1 : 0))
+  
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target
@@ -152,7 +151,7 @@ export function HotelBooking() {
 
                     {nights > 0 && (
                       <div className="bg-blue-50 border border-blue-100 rounded-lg p-3 text-sm text-blue-800 font-medium">
-                        📅 {nights} night{nights > 1 ? "s" : ""} stay · Total: <span className="font-bold"> / ₹{totalINR}</span>
+                        📅 {nights} night{nights > 1 ? "s" : ""} stay · Price: <span className="font-bold">₹299</span>
                       </div>
                     )}
 
@@ -217,7 +216,7 @@ export function HotelBooking() {
                       <CheckCircle2 className="w-12 h-12 text-green-500 mx-auto mb-3" />
                       <h3 className="text-xl font-bold text-slate-900 mb-1">Details Confirmed!</h3>
                       <p className="text-slate-600 mb-2">Your booking for <strong>{formData.city}</strong> ({nights} night{nights !== 1 ? "s" : ""}) is ready.</p>
-                      <p className="text-2xl font-bold text-blue-700"> <span className="text-slate-400 text-base">/ ₹{totalINR}</span></p>
+                      <p className="text-2xl font-bold text-blue-700">₹299</p>
                     </div>
 
                     <div className="bg-white border border-slate-200 rounded-xl p-5 text-left space-y-2 text-sm text-slate-600">
@@ -258,12 +257,12 @@ export function HotelBooking() {
               <CardContent className="pt-4 space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-slate-600">Hotel Reservation</span>
-                  <span className="font-semibold"> / ₹{totalINR}</span>
+                  <span className="font-semibold">₹299</span>
                 </div>
                 {nights > 0 && <div className="text-xs text-slate-500">{nights} night{nights !== 1 ? "s" : ""}</div>}
                 <div className="flex justify-between items-center text-sm text-green-600"><span>Instant Delivery</span><span>Free</span></div>
                 <div className="border-t border-slate-100 pt-3 flex justify-between items-center font-bold text-lg">
-                  <span>Total</span><span className="text-blue-600"> / ₹{totalINR}</span>
+                  <span>Total</span><span className="text-blue-600">₹299</span>
                 </div>
               </CardContent>
             </Card>
