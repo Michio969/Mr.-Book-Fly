@@ -64,8 +64,20 @@ export function HotelBooking() {
   }
 
   const handleWhatsAppRedirect = () => {
-    const msg = 
-    window.open(, "_blank")
+    const msg = encodeURIComponent(
+      `Hello Mr. Book & Fly! I'd like to book a hotel reservation for my visa.\n\n` +
+      `Destination: ${formData.city}\n` +
+      `Check-in: ${formData.checkin}\n` +
+      `Check-out: ${formData.checkout}\n` +
+      `Name: ${formData.firstName} ${formData.lastName}\n` +
+      `Email: ${formData.email}\n` +
+      `Phone: ${formData.phone}\n` +
+      `Passport: ${formData.passport}\n` +
+      `Date of Birth: ${formData.dob}\n` +
+      `Gender: ${formData.gender}\n` +
+      `Nationality: ${formData.nationality}`
+    )
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`, "_blank")
   }
 
   return (
@@ -268,7 +280,7 @@ export function HotelBooking() {
             </Card>
 
             <Button className="w-full bg-green-500 hover:bg-green-600 text-white" asChild>
-              <a href={} target="_blank" rel="noopener noreferrer">💬 Book via WhatsApp Directly</a>
+              <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer">💬 Book via WhatsApp Directly</a>
             </Button>
           </div>
         </div>
