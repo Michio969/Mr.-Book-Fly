@@ -456,4 +456,245 @@ function Deals() {
       title: "Weekend Escape to Dubai",
       price: "₹28,499",
     },
-    
+    {
+      img: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+      badge: "Limited Time",
+      from: "Mumbai",
+      to: "Tokyo",
+      title: "Cherry Blossom Japan Tour",
+      price: "₹89,999",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=600&q=80",
+      badge: "Early Bird",
+      from: "Bangalore",
+      to: "Paris",
+      title: "Paris Luxury Package",
+      price: "₹1,10,000",
+    },
+  ];
+
+  return (
+    <section className="section section-bg">
+      <div className="section-inner">
+        <div className="sec-head reveal">
+          <span className="sec-tag">Hot Deals</span>
+          <h2 className="sec-title">
+            Limited Time
+            <br />
+            Offers
+          </h2>
+          <p className="sec-desc">
+            Grab these deals before they're gone — prices updated daily.
+          </p>
+        </div>
+        <div className="deals-grid">
+          {deals.map((d, i) => (
+            <div key={i} className={`deal-card reveal delay-${i + 1}`}>
+              <div className="deal-img">
+                <img src={d.img} alt={d.title} loading="lazy" />
+                <span className="deal-badge">{d.badge}</span>
+              </div>
+              <div className="deal-body">
+                <div className="deal-route">
+                  {d.from} <em>✈</em> {d.to}
+                </div>
+                <div className="deal-name">{d.title}</div>
+              </div>
+              <div className="deal-foot">
+                <div>
+                  <div
+                    style={{
+                      fontSize: "11px",
+                      color: "var(--gray)",
+                      textTransform: "uppercase",
+                      letterSpacing: "1px",
+                      marginBottom: "2px",
+                    }}
+                  >
+                    From
+                  </div>
+                  <div className="deal-price">
+                    {d.price} <small>/person</small>
+                  </div>
+                </div>
+                <button
+                  className="deal-book"
+                  onClick={() => (window.location.href = "/flight-reservation")}
+                >
+                  Book Now
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── REVIEWS ──────────────────────────────────────────────────
+function Reviews() {
+  const data = [
+    {
+      stars: 5,
+      text: "Booked my Dubai trip in minutes. The prices were unbeatable and the support team was amazing. Highly recommended!",
+      name: "Priya Sharma",
+      loc: "Mumbai",
+      init: "P",
+    },
+    {
+      stars: 5,
+      text: "Found a flight to Tokyo at half the price compared to other sites. The booking process was smooth and fast.",
+      name: "Rahul Verma",
+      loc: "Delhi",
+      init: "R",
+    },
+    {
+      stars: 5,
+      text: "The Paris package was absolutely perfect. Everything arranged — hotels, flights, local experiences. 10/10!",
+      name: "Ananya Patel",
+      loc: "Bangalore",
+      init: "A",
+    },
+  ];
+
+  return (
+    <section className="section section-dark">
+      <div className="section-inner">
+        <div className="sec-head reveal">
+          <span className="sec-tag">Testimonials</span>
+          <h2 className="sec-title">Loved by Thousands</h2>
+          <p className="sec-desc">Real stories from real travellers</p>
+        </div>
+        <div className="reviews-grid">
+          {data.map((r, i) => (
+            <div key={i} className={`review-card reveal delay-${i + 1}`}>
+              <div className="stars">{"★".repeat(r.stars)}</div>
+              <p className="review-text">"{r.text}"</p>
+              <div className="reviewer">
+                <div className="reviewer-av">{r.init}</div>
+                <div>
+                  <div className="reviewer-name">{r.name}</div>
+                  <div className="reviewer-loc">{r.loc}, India</div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── CTA BANNER ───────────────────────────────────────────────
+function CTABanner() {
+  return (
+    <section className="cta-section">
+      <div className="cta-inner reveal">
+        <h2 className="cta-title">
+          Ready for Your
+          <br />
+          Next Adventure?
+        </h2>
+        <p className="cta-desc">
+          Join over 2 million happy travellers. Book today and save up to 40%
+          on flights and hotels.
+        </p>
+        <button
+          className="btn-dark"
+          onClick={() => (window.location.href = "/flight-reservation")}
+        >
+          Start Booking →
+        </button>
+      </div>
+    </section>
+  );
+}
+
+// ── NEWSLETTER ───────────────────────────────────────────────
+function Newsletter() {
+  const [email, setEmail] = useState("");
+  const [done, setDone] = useState(false);
+
+  return (
+    <section className="news-section">
+      <div className="news-inner reveal">
+        <span className="sec-tag">Newsletter</span>
+        <h2 className="sec-title" style={{ fontSize: "34px" }}>
+          Get Exclusive Deals
+        </h2>
+        <p className="sec-desc">
+          Subscribe and be first to know about flash sales and secret fares.
+        </p>
+        {done ? (
+          <div
+            style={{
+              marginTop: "28px",
+              padding: "18px",
+              background: "#f0fdf4",
+              borderRadius: "12px",
+              color: "#166534",
+              fontWeight: 600,
+            }}
+          >
+            🎉 You're subscribed! Watch your inbox for deals.
+          </div>
+        ) : (
+          <form
+            className="news-form"
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (email) setDone(true);
+            }}
+          >
+            <input
+              type="email"
+              className="news-input"
+              placeholder="Your email address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <button type="submit" className="news-btn">
+              Subscribe
+            </button>
+          </form>
+        )}
+      </div>
+    </section>
+  );
+}
+
+// ── FULL HOME PAGE ───────────────────────────────────────────
+function HomePage() {
+  useReveal();
+  return (
+    <>
+      <Hero />
+      <SearchBox />
+      <Stats />
+      <Services />
+      <Destinations />
+      <Deals />
+      <Reviews />
+      <CTABanner />
+      <Newsletter />
+    </>
+  );
+}
+
+// ── MAIN APP ─────────────────────────────────────────────────
+export default function App() {
+  useReveal();
+
+  return (
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+      <Footer />
+    </Router>
+  );
+}
