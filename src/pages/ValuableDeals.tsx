@@ -289,11 +289,3 @@ export default function ValuableDeals() {
     </div>
   )
 }
-<SEO 
-  title="Valuable Travel Deals & Offers"
-  description="Discover exclusive travel deals, discounts, and special offers 
-  on flights, hotels, and vacation packages."
-  keywords="travel deals, flight deals, hotel discounts, vacation offers, 
-  special deals"
-  canonical="/valuable-deals"
-/>
