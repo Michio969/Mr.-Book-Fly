@@ -273,3 +273,11 @@ export default function HealthInsurancePage() {
     </div>
   );
 }
+<SEO 
+  title="Travel Health Insurance"
+  description="Protect your trip with comprehensive travel health insurance. 
+  Coverage for medical emergencies, trip cancellations, and more."
+  keywords="travel health insurance, medical insurance, trip insurance, 
+  travel protection"
+  canonical="/health-insurance"
+/>
