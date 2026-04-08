@@ -122,4 +122,10 @@ export function Contact() {
     </div>
   )
 }
-
+<SEO 
+  title="Contact Us - Customer Support"
+  description="Get in touch with MrBookAndFly customer support. We're here to 
+  help with your travel bookings and inquiries."
+  keywords="contact us, customer support, travel help, booking assistance"
+  canonical="/contact"
+/>
