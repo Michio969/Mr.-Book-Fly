@@ -1,5 +1,3 @@
-import SEO from '../components/SEO'
-
 export default function FlightReservation() {
   return (
     <>
@@ -21,10 +19,3 @@ export default function FlightReservation() {
     </>
   )
 }
-<SEO 
-  title="Flight Reservation & Booking"
-  description="Book cheap flights online. Compare airline tickets and find the 
-  best deals on domestic and international flights."
-  keywords="flight reservation, book flights, cheap flights, airline tickets"
-  canonical="/flight-reservation"
-/>
