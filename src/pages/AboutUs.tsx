@@ -1,5 +1,3 @@
-import { ShieldCheck, Users, Globe, Award } from "lucide-react"
-
 export function AboutUs() {
   return (
     <div className="min-h-screen bg-slate-50 py-20">
@@ -70,10 +68,3 @@ export function AboutUs() {
     </div>
   )
 }
-<SEO 
-  title="About Us - MrBookAndFly"
-  description="Learn about MrBookAndFly, your trusted travel partner for flights, 
-  hotels, visa support, and comprehensive travel services."
-  keywords="about mrbookandfly, travel company, travel services"
-  canonical="/about-us"
-/>
