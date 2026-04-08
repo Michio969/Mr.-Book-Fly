@@ -50,10 +50,4 @@ export function TermsOfService() {
     </div>
   )
 }
-<SEO 
-  title="Terms of Service"
-  description="Review the terms and conditions for using MrBookAndFly's travel 
-  booking and support services."
-  keywords="terms of service, terms and conditions, user agreement"
-  canonical="/terms-of-service"
-/>
+
