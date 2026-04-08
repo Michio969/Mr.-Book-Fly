@@ -287,10 +287,4 @@ export function HotelBooking() {
     </div>
   )
 }
-<SEO 
-  title="Hotel Booking & Reservations"
-  description="Find and book hotels worldwide at the best prices. Compare hotel 
-  deals and reserve your accommodation today."
-  keywords="hotel booking, hotel reservation, cheap hotels, book hotels online"
-  canonical="/hotel-booking"
-/>
+
