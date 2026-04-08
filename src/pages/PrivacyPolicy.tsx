@@ -57,10 +57,3 @@ export function PrivacyPolicy() {
     </div>
   )
 }
-<SEO 
-  title="Privacy Policy"
-  description="Read MrBookAndFly's privacy policy to understand how we collect, 
-  use, and protect your personal information."
-  keywords="privacy policy, data protection, user privacy"
-  canonical="/privacy-policy"
-/>
