@@ -70,4 +70,10 @@ export function AboutUs() {
     </div>
   )
 }
-
+<SEO 
+  title="About Us - MrBookAndFly"
+  description="Learn about MrBookAndFly, your trusted travel partner for flights, 
+  hotels, visa support, and comprehensive travel services."
+  keywords="about mrbookandfly, travel company, travel services"
+  canonical="/about-us"
+/>
