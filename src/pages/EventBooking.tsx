@@ -225,10 +225,4 @@ export function EventBooking() {
     </div>
   )
 }
-<SEO 
-  title="Event Booking & Tickets"
-  description="Book tickets for events, concerts, shows, and attractions 
-  worldwide. Secure your spot at the best events."
-  keywords="event booking, event tickets, concert tickets, show tickets"
-  canonical="/event-booking"
-/>
+
