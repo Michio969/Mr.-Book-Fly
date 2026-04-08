@@ -211,4 +211,10 @@ export function InvitationLetter() {
     </div>
   )
 }
-
+<SEO 
+  title="Travel Invitation Letter Service"
+  description="Get official invitation letters for visa applications and 
+  travel purposes. Fast processing and delivery."
+  keywords="invitation letter, visa invitation, travel invitation letter"
+  canonical="/invitation-letter"
+/>
