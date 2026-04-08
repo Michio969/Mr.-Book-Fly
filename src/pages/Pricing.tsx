@@ -152,10 +152,4 @@ export function Pricing() {
     </div>
   )
 }
-<SEO 
-  title="Pricing & Service Plans"
-  description="View our transparent pricing for travel services including flight 
-  bookings, hotels, visa support, and more."
-  keywords="travel service pricing, booking fees, service plans"
-  canonical="/pricing"
-/>
+
