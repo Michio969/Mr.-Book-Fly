@@ -1,47 +1,28 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { Layout } from "./components/layout/Layout"
-import { Home } from "./pages/Home"
-import { HotelBooking } from "./pages/HotelBooking"
-import { FlightReservation } from "./pages/FlightReservation"
-import { EventBooking } from "./pages/EventBooking"
-import { InvitationLetter } from "./pages/InvitationLetter"
-import HealthInsurance from "./pages/HealthInsurance"
-import SlotBooking from "./pages/SlotBooking"
-import ValuableDeals from "./pages/ValuableDeals"
-import { VisaSupport } from "./pages/VisaSupport"
-import { Pricing } from "./pages/Pricing"
-import { AboutUs } from "./pages/AboutUs"
-import { Contact } from "./pages/Contact"
-import { Dashboard } from "./pages/Dashboard"
-import { TermsOfService } from "./pages/TermsOfService"
-import { PrivacyPolicy } from "./pages/PrivacyPolicy"
-import { RefundPolicy } from "./pages/RefundPolicy"
-import { OrderForm } from "./pages/OrderForm"
-
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="hotel-booking" element={<HotelBooking />} />
-          <Route path="flight-reservation" element={<FlightReservation />} />
-          <Route path="event-booking" element={<EventBooking />} />
-          <Route path="invitation-letter" element={<InvitationLetter />} />
-          <Route path="/health-insurance" element={<HealthInsurance />} />
-          <Route path="/slot-booking" element={<SlotBooking />} />
-          <Route path="/valuable-deals" element={<ValuableDeals />} />
-          <Route path="order-form" element={<OrderForm />} />
-          <Route path="visa-support" element={<VisaSupport />} />
-          <Route path="pricing" element={<Pricing />} />
-          <Route path="about" element={<AboutUs />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="terms" element={<TermsOfService />} />
-          <Route path="privacy" element={<PrivacyPolicy />} />
-          <Route path="refund" element={<RefundPolicy />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  )
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-50 via-white to-zinc-100 p-8">
+      <div className="space-y-6 text-center">
+        <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-violet-500 to-indigo-600 shadow-lg shadow-indigo-200">
+          <svg
+            className="h-8 w-8 text-white"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+            <path d="M10 4v4" />
+            <path d="M2 8h20" />
+            <path d="M6 4v4" />
+          </svg>
+        </div>
+        <div className="space-y-2">
+          <h1 className="text-3xl font-semibold tracking-tight text-slate-900">Ready to build</h1>
+          <p className="text-slate-500">Start prompting to build your app.</p>
+        </div>
+      </div>
+    </div>
+  );
 }
