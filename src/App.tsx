@@ -16,7 +16,7 @@ import { Dashboard } from "./pages/Dashboard"
 import { TermsOfService } from "./pages/TermsOfService"
 import { PrivacyPolicy } from "./pages/PrivacyPolicy"
 import { RefundPolicy } from "./pages/RefundPolicy"
-import { OrderForm } from "./pages/OrderForm"
+import OrderForm from "./pages/OrderForm"
 
 export default function App() {
   return (
