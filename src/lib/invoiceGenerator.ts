@@ -17,35 +17,28 @@ interface InvoiceData {
 export function generateInvoice(data: InvoiceData): jsPDF {
   const doc = new jsPDF();
   
-  // Company Colors
-  const primaryColor = [41, 128, 185]; // Blue
+  const primaryColor = [41, 128, 185];
   const darkColor = [44, 62, 80];
   const lightGray = [236, 240, 241];
   
-  // === HEADER SECTION ===
   doc.setFillColor(...primaryColor);
   doc.rect(0, 0, 210, 40, 'F');
   
-  // Company Name (Left Side)
   doc.setTextColor(255, 255, 255);
   doc.setFontSize(24);
   doc.setFont('helvetica', 'bold');
   doc.text('Mr. Book & Fly', 20, 20);
   
-  // Tagline
   doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
   doc.text('100% Embassy Acceptable Bookings', 20, 28);
   
-  // Invoice Title (Right Side)
   doc.setFontSize(20);
   doc.setFont('helvetica', 'bold');
   doc.text('INVOICE', 190, 20, { align: 'right' });
   
-  // Reset text color
   doc.setTextColor(...darkColor);
   
-  // === INVOICE INFO BOX (Fixed positioning) ===
   let yPos = 45;
   doc.setFontSize(9);
   doc.setFont('helvetica', 'bold');
@@ -53,7 +46,6 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8);
   
-  // Split long order ID if needed
   const orderId = data.orderId;
   if (orderId.length > 15) {
     doc.text(orderId.substring(0, 15), 150, yPos);
@@ -71,7 +63,6 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   doc.setFontSize(8);
   doc.text(data.date, 150, yPos);
   
-  // === COMPANY INFO ===
   yPos = 60;
   doc.setFontSize(11);
   doc.setFont('helvetica', 'bold');
@@ -88,7 +79,6 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   yPos += 5;
   doc.text('Phone: +91 9056732633', 20, yPos);
   
-  // === CUSTOMER INFO ===
   yPos = 60;
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(11);
@@ -103,7 +93,6 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   yPos += 5;
   doc.text(data.customerPhone, 120, yPos);
   
-  // === SERVICE DETAILS TABLE ===
   yPos = 100;
   
   const tableData = getServiceTableData(data.serviceType, data.serviceDetails, data.amount);
@@ -132,15 +121,12 @@ export function generateInvoice(data: InvoiceData): jsPDF {
     }
   });
   
-  // Get final Y position after table
   yPos = (doc as any).lastAutoTable.finalY + 10;
   
-  // === PAYMENT SUMMARY ===
   const subtotal = data.amount;
-  const gst = data.gst || (subtotal * 0.18); // 18% GST
+  const gst = data.gst || (subtotal * 0.18);
   const total = subtotal + gst;
   
-  // Draw summary box
   const boxX = 125;
   const boxY = yPos;
   const boxWidth = 65;
@@ -162,7 +148,6 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   doc.text('Total:', boxX + 5, boxY + 24);
   doc.text(`$${total.toFixed(2)}`, boxX + boxWidth - 5, boxY + 24, { align: 'right' });
   
-  // === PAYMENT INFO ===
   yPos += 35;
   doc.setFontSize(11);
   doc.setFont('helvetica', 'bold');
@@ -181,7 +166,6 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   doc.setTextColor(...darkColor);
   doc.setFont('helvetica', 'normal');
   
-  // === FOOTER ===
   yPos = 270;
   doc.setFillColor(...primaryColor);
   doc.rect(0, yPos, 210, 27, 'F');
@@ -200,11 +184,9 @@ export function generateInvoice(data: InvoiceData): jsPDF {
 function getServiceTableData(serviceType: string, details: any, amount: number): any[] {
   const data: any[] = [];
   
-  // Add service header
   const serviceName = details.serviceName || serviceType;
   data.push([{ content: serviceName, colSpan: 3, styles: { fontStyle: 'bold', fillColor: [240, 240, 240] } }]);
   
-  // If multiple travelers
   if (details.travelers && details.travelers.length > 0) {
     data.push(['Number of Travelers', details.travelers.length.toString(), '']);
     
@@ -225,7 +207,6 @@ function getServiceTableData(serviceType: string, details: any, amount: number):
     data.push([{ content: '', colSpan: 2 }, '']);
     data.push(['Total Amount', '', amount.toFixed(2)]);
   } else {
-    // Fallback for single booking
     switch (serviceType) {
       case 'hotel':
         data.push(['Hotel Booking', details.location || 'N/A', '']);
@@ -256,17 +237,14 @@ function getServiceTableData(serviceType: string, details: any, amount: number):
   return data;
 }
 
-// Download invoice
 export function downloadInvoice(doc: jsPDF, orderId: string): void {
   doc.save(`Invoice_${orderId}_${Date.now()}.pdf`);
 }
 
-// Get invoice as blob (for email attachment)
 export function getInvoiceBlob(doc: jsPDF): Blob {
   return doc.output('blob');
 }
 
-// Get invoice as base64 (for email)
 export function getInvoiceBase64(doc: jsPDF): string {
   return doc.output('dataurlstring');
 }
