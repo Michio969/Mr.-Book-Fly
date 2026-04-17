@@ -73,7 +73,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     );
 
     doc.moveDown(1);
-    doc.text("For support: support@mrbookandfly.shop", { align: "center" });
+    doc.text("For support: 92sweetflower@gmail.com", { align: "center" });
     doc.text("Website: www.mrbookandfly.shop", { align: "center" });
 
     // Finalize the PDF
