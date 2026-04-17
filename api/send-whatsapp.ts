@@ -63,24 +63,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 }
 
 function createWhatsAppMessage(order: any): string {
-  let serviceDetails = '';
-  
-  switch(order.serviceType) {
-    case 'hotel':
-      serviceDetails = `🏨 *Hotel Booking*\n📍 ${order.location || 'N/A'}\n📅 Check-in: ${order.checkIn || 'N/A'}\n📅 Check-out: ${order.checkOut || 'N/A'}`;
-      break;
-    case 'flight':
-      serviceDetails = `✈️ *Flight Booking*\n🛫 From: ${order.from || 'N/A'}\n🛬 To: ${order.to || 'N/A'}\n📅 ${order.travelDate || 'N/A'}`;
-      break;
-    case 'event':
-      serviceDetails = `🎉 *Event Booking*\n📌 ${order.eventName || 'N/A'}\n📅 ${order.eventDate || 'N/A'}`;
-      break;
-    case 'health':
-      serviceDetails = `🏥 *Health Insurance*\n📋 ${order.planType || 'N/A'}`;
-      break;
-    default:
-      serviceDetails = `📦 *${order.serviceType || 'Booking'}*`;
-  }
+  // ... existing code ...
 
   return `
 🎯 *NEW BOOKING - Mr. Book & Fly*
@@ -98,11 +81,14 @@ Name: ${order.name || 'N/A'}
 
 ━━━━━━━━━━━━━━━━━━━━
 💰 *Payment Details*
-Amount: ₹${order.amount || 'N/A'}
+Amount: $${order.totalAmount}
 🔖 UPI Ref: ${order.upiReference}
 📅 Date: ${order.date}
 
 ━━━━━━━━━━━━━━━━━━━━
+📄 *Invoice generated and sent*
+📧 Support: 92sweetflower@gmail.com
+📱 WhatsApp: +91 9056732633
 ⏳ Status: Pending Verification
   `.trim();
 }
