@@ -1,12 +1,12 @@
 {
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/" }
-  ],
-  "functions": {
-    "api/**/*.ts": {
-      "memory": 3008,
-      "maxDuration": 30
+    { 
+      "source": "/api/:path*", 
+      "destination": "/api/:path*" 
+    },
+    { 
+      "source": "/:path*", 
+      "destination": "/" 
     }
-  }
+  ]
 }
