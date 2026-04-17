@@ -35,7 +35,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const message = createWhatsAppMessage(order);
 
     // Your WhatsApp Business number (REPLACE WITH YOUR ACTUAL NUMBER)
-    const whatsappNumber = '919XXXXXXXXX'; // ⚠️ CHANGE THIS!
+    const whatsappNumber = '447877679344'; //
     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
     // Return success response
