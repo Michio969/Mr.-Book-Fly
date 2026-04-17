@@ -174,4 +174,99 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   doc.text('Payment Method: UPI', 20, yPos);
   yPos += 5;
   doc.text(`UPI Reference: ${data.upiReference}`, 20, yPos);
-  yPos += 
+  yPos += 5;
+  doc.setTextColor(0, 150, 0);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Payment Status: PAID ✓', 20, yPos);
+  doc.setTextColor(...darkColor);
+  doc.setFont('helvetica', 'normal');
+  
+  // === FOOTER ===
+  yPos = 270;
+  doc.setFillColor(...primaryColor);
+  doc.rect(0, yPos, 210, 27, 'F');
+  
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'italic');
+  doc.text('Thank you for choosing Mr. Book & Fly!', 105, yPos + 8, { align: 'center' });
+  doc.text('For support, contact: 92sweetflower@gmail.com', 105, yPos + 13, { align: 'center' });
+  doc.text('WhatsApp: +91 9056732633', 105, yPos + 18, { align: 'center' });
+  doc.text('This is a computer-generated invoice.', 105, yPos + 23, { align: 'center' });
+  
+  return doc;
+}
+
+function getServiceTableData(serviceType: string, details: any, amount: number): any[] {
+  const data: any[] = [];
+  
+  // Add service header
+  const serviceName = details.serviceName || serviceType;
+  data.push([{ content: serviceName, colSpan: 3, styles: { fontStyle: 'bold', fillColor: [240, 240, 240] } }]);
+  
+  // If multiple travelers
+  if (details.travelers && details.travelers.length > 0) {
+    data.push(['Number of Travelers', details.travelers.length.toString(), '']);
+    
+    details.travelers.forEach((traveler: any, index: number) => {
+      data.push([{ content: `Traveler ${index + 1}`, colSpan: 3, styles: { fontStyle: 'bold', fillColor: [250, 250, 250] } }]);
+      data.push(['Name', traveler.fullName, '']);
+      data.push(['Email', traveler.email, '']);
+      data.push(['Phone', traveler.phone, '']);
+      
+      if (serviceType !== 'health') {
+        if (traveler.departureCity) data.push(['From', traveler.departureCity, '']);
+        if (traveler.destinationCity) data.push(['To', traveler.destinationCity, '']);
+        if (traveler.departureDate) data.push(['Departure', traveler.departureDate, '']);
+        if (traveler.returnDate) data.push(['Return', traveler.returnDate, '']);
+      }
+    });
+    
+    data.push([{ content: '', colSpan: 2 }, '']);
+    data.push(['Total Amount', '', amount.toFixed(2)]);
+  } else {
+    // Fallback for single booking
+    switch (serviceType) {
+      case 'hotel':
+        data.push(['Hotel Booking', details.location || 'N/A', '']);
+        data.push(['Check-in', details.checkIn || 'N/A', '']);
+        data.push(['Check-out', details.checkOut || 'N/A', '']);
+        data.push(['Total', '', amount.toFixed(2)]);
+        break;
+        
+      case 'flight':
+        data.push(['Flight Reservation', '', '']);
+        data.push(['From', details.from || 'N/A', '']);
+        data.push(['To', details.to || 'N/A', '']);
+        data.push(['Date', details.departureDate || 'N/A', '']);
+        data.push(['Total', '', amount.toFixed(2)]);
+        break;
+        
+      case 'health':
+        data.push(['Health Insurance', '', '']);
+        data.push(['Plan Type', details.planType || 'N/A', '']);
+        data.push(['Total', '', amount.toFixed(2)]);
+        break;
+        
+      default:
+        data.push([serviceType, 'Booking Service', amount.toFixed(2)]);
+    }
+  }
+  
+  return data;
+}
+
+// Download invoice
+export function downloadInvoice(doc: jsPDF, orderId: string): void {
+  doc.save(`Invoice_${orderId}_${Date.now()}.pdf`);
+}
+
+// Get invoice as blob (for email attachment)
+export function getInvoiceBlob(doc: jsPDF): Blob {
+  return doc.output('blob');
+}
+
+// Get invoice as base64 (for email)
+export function getInvoiceBase64(doc: jsPDF): string {
+  return doc.output('dataurlstring');
+}
