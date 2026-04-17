@@ -1,22 +1,14 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import PDFDocument from 'pdfkit';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { type, details, upiReference } = req.body;
+  const { type, details } = req.body;
 
   try {
-    // Validate UPI Reference (12 digits)
-    if (upiReference && !/^\d{12}$/.test(upiReference)) {
-      return res.status(400).json({ 
-        error: 'Invalid UPI reference number. Must be 12 digits.' 
-      });
-    }
-
     const doc = new PDFDocument({ margin: 50 });
     
     // Set response headers for PDF download
@@ -34,7 +26,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     doc.fontSize(12).font("Helvetica").text("100% Embassy Acceptable Bookings", { align: "center" });
     doc.moveDown(2);
 
-    // Add Title based on type
+    // Add Title
     let title = "Booking Confirmation";
     if (type === "flight") title = "Flight Reservation";
     if (type === "hotel") title = "Hotel Booking";
@@ -49,24 +41,17 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const bookingRef = Math.random().toString(36).substring(2, 10).toUpperCase();
     doc.fontSize(12).font("Helvetica");
     doc.text(`Booking Reference: MBF-${bookingRef}`);
-    doc.text(`Date Issued: ${new Date().toLocaleDateString()}`);
+    doc.text(`Date Issued: ${new Date().toLocaleDateString('en-IN', { timeZone: 'Asia/Kolkata' })}`);
     doc.moveDown(1);
 
-    // Add UPI Payment Confirmation if provided
-    if (upiReference) {
-      doc.font("Helvetica-Bold").text("Payment Confirmed", { underline: true });
-      doc.font("Helvetica").text(`UPI Reference: ${upiReference}`);
-      doc.text(`Payment Status: Verified ✓`);
-      doc.moveDown(1);
-    }
-
-    // Add specific details based on type
+    // Add Details
     if (details) {
       doc.font("Helvetica-Bold").text("Booking Details:", { underline: true });
       doc.font("Helvetica");
       
       Object.entries(details).forEach(([key, value]) => {
-        // Format key: camelCase to Title Case
+        if (key === 'upiReference') return; // Skip UPI ref in general details
+        
         const formattedKey = key
           .replace(/([A-Z])/g, " $1")
           .replace(/^./, (str) => str.toUpperCase());
@@ -78,7 +63,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
     doc.moveDown(2);
 
-    // Add Footer/Disclaimer
+    // Add Footer
     doc.fontSize(10).fillColor("gray");
     doc.text(
       "Disclaimer: This document is provided by Mr. Book & Fly for visa application purposes. " +
@@ -87,10 +72,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       { align: "center" }
     );
 
-    // Add contact info
     doc.moveDown(1);
-    doc.text("For queries, contact: support@mrbookandfly.shop", { align: "center" });
-    doc.text("WhatsApp: +91 XXXXXXXXXX", { align: "center" });
+    doc.text("For support: support@mrbookandfly.shop", { align: "center" });
+    doc.text("Website: www.mrbookandfly.shop", { align: "center" });
 
     // Finalize the PDF
     doc.end();
@@ -99,7 +83,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     console.error("Error generating PDF:", error);
     res.status(500).json({ 
       error: "Failed to generate PDF",
-      details: error.message 
+      message: error.message 
     });
   }
 }
