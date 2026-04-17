@@ -49,5 +49,7 @@
     "tailwindcss": "^4.1.14",
     "tsx": "^4.21.0",
     "typescript": "~5.8.2"
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.2",
   }
 }
