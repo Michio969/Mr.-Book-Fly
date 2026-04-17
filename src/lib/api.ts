@@ -41,7 +41,7 @@ export async function generatePDF(type: string, details: any) {
 // Process Order with UPI Payment
 export async function processOrder(orderData: any, upiReference: string) {
   try {
-    const response = await fetch("/api/process-order", {
+    const response = await fetch("/api/send-whatsapp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export async function processOrder(orderData: any, upiReference: string) {
     const result = await response.json();
 
     if (!response.ok || !result.success) {
-      throw new Error(result.error || result.message || "Failed to process order");
+      throw new Error(result.error || 'Failed to process order');
     }
 
     return result;
