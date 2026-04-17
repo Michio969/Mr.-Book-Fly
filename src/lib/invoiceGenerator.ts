@@ -1,16 +1,6 @@
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
-interface Traveler {
-  fullName: string;
-  email: string;
-  phone: string;
-  departureCity?: string;
-  destinationCity?: string;
-  departureDate?: string;
-  returnDate?: string;
-}
-
 interface InvoiceData {
   orderId: string;
   date: string;
@@ -24,272 +14,164 @@ interface InvoiceData {
   gst?: number;
 }
 
-// ─── Color Helpers ────────────────────────────────────────────────────────────
-const BRAND_BLUE  = [26,  60, 110] as [number, number, number];
-const ACCENT_BLUE = [37,  99, 235] as [number, number, number];
-const LIGHT_BLUE  = [239, 246, 255] as [number, number, number];
-const LIGHT_GREY  = [248, 250, 252] as [number, number, number];
-const MID_GREY    = [100, 116, 139] as [number, number, number];
-const DARK        = [ 30,  41,  59] as [number, number, number];
-const WHITE       = [255, 255, 255] as [number, number, number];
-const BORDER_GREY = [226, 232, 240] as [number, number, number];
-
-function rgb(c: [number, number, number]) {
-  return { r: c[0], g: c[1], b: c[2] };
-}
-
 export function generateInvoice(data: InvoiceData): jsPDF {
-  const doc = new jsPDF({ unit: 'mm', format: 'a4' });
-  const PW = 210; // page width
-  const ML = 14;  // margin left
-  const MR = 14;  // margin right
-  const CW = PW - ML - MR; // content width
-
-  const subtotal = data.amount;
-  const gst      = data.gst ?? subtotal * 0.18;
-  const total    = subtotal + gst;
-
-  // ── 1. HEADER BANNER ───────────────────────────────────────────────────────
-  doc.setFillColor(...BRAND_BLUE);
-  doc.rect(0, 0, PW, 38, 'F');
-
-  // Company name
-  doc.setTextColor(...WHITE);
+  const doc = new jsPDF();
+  
+  // Company Colors
+  const primaryColor = [41, 128, 185]; // Blue
+  const darkColor = [44, 62, 80];
+  const lightGray = [236, 240, 241];
+  
+  // === HEADER SECTION ===
+  doc.setFillColor(...primaryColor);
+  doc.rect(0, 0, 210, 40, 'F');
+  
+  // Company Name (Left Side)
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(24);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Mr. Book & Fly', 20, 20);
+  
+  // Tagline
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'normal');
+  doc.text('100% Embassy Acceptable Bookings', 20, 28);
+  
+  // Invoice Title (Right Side)
   doc.setFontSize(20);
   doc.setFont('helvetica', 'bold');
-  doc.text('Mr. Book & Fly', ML, 14);
-
-  // Tagline
-  doc.setFontSize(8.5);
-  doc.setFont('helvetica', 'normal');
-  doc.setTextColor(191, 215, 255);
-  doc.text('100% Embassy Acceptable Bookings', ML, 20);
-  doc.text('www.mrbookandfly.shop  |  support@mrbookandfly.shop', ML, 26);
-
-  // INVOICE label (right)
-  doc.setTextColor(...WHITE);
-  doc.setFontSize(22);
+  doc.text('INVOICE', 190, 20, { align: 'right' });
+  
+  // Reset text color
+  doc.setTextColor(...darkColor);
+  
+  // === INVOICE INFO BOX (Fixed positioning) ===
+  let yPos = 45;
+  doc.setFontSize(9);
   doc.setFont('helvetica', 'bold');
-  doc.text('INVOICE', PW - MR, 15, { align: 'right' });
-
-  // Invoice # and Date (right)
-  doc.setFontSize(7.5);
+  doc.text('Invoice #:', 130, yPos);
   doc.setFont('helvetica', 'normal');
-  doc.setTextColor(191, 215, 255);
-  doc.text('Invoice #', PW - MR, 22, { align: 'right' });
-  doc.text('Date Issued', PW - MR, 29, { align: 'right' });
-
-  doc.setTextColor(...WHITE);
-  doc.setFont('helvetica', 'bold');
   doc.setFontSize(8);
-  doc.text(data.orderId, PW - MR - 22, 22);
-  doc.text(data.date,    PW - MR - 22, 29);
-
-  // ── 2. BILLED TO + SERVICE INFO ────────────────────────────────────────────
-  let y = 44;
-
-  // Left box — Billed To
-  const boxW = (CW - 6) / 2;
-  doc.setFillColor(...LIGHT_BLUE);
-  doc.roundedRect(ML, y, boxW, 28, 2, 2, 'F');
-
-  doc.setFontSize(7);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...ACCENT_BLUE);
-  doc.text('BILLED TO', ML + 5, y + 6);
-
+  
+  // Split long order ID if needed
+  const orderId = data.orderId;
+  if (orderId.length > 15) {
+    doc.text(orderId.substring(0, 15), 150, yPos);
+    doc.text(orderId.substring(15), 150, yPos + 3);
+    yPos += 6;
+  } else {
+    doc.text(orderId, 150, yPos);
+    yPos += 4;
+  }
+  
   doc.setFontSize(9);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...DARK);
-  doc.text(data.customerName,  ML + 5, y + 13);
+  doc.text('Date:', 130, yPos);
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8.5);
-  doc.text(data.customerEmail, ML + 5, y + 19);
-  doc.text(data.customerPhone, ML + 5, y + 25);
-
-  // Right box — Service Details
-  const rx = ML + boxW + 6;
-  doc.setFillColor(...LIGHT_GREY);
-  doc.setDrawColor(...BORDER_GREY);
-  doc.setLineWidth(0.3);
-  doc.roundedRect(rx, y, boxW, 28, 2, 2, 'FD');
-
-  doc.setFontSize(7);
+  doc.setFontSize(8);
+  doc.text(data.date, 150, yPos);
+  
+  // === COMPANY INFO ===
+  yPos = 60;
+  doc.setFontSize(11);
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...ACCENT_BLUE);
-  doc.text('SERVICE DETAILS', rx + 5, y + 6);
-
-  const serviceName = getServiceLabel(data.serviceType, data.serviceDetails);
-  doc.setFontSize(9);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...DARK);
-  doc.text(serviceName, rx + 5, y + 13);
+  doc.text('From:', 20, yPos);
+  yPos += 6;
+  
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8.5);
-  const travelers = data.serviceDetails?.travelers ?? [];
-  doc.text(`Travelers: ${travelers.length || 1}`, rx + 5, y + 19);
-  doc.text(`$${(data.amount / Math.max(travelers.length, 1)).toFixed(2)} per person`, rx + 5, y + 25);
-
-  // ── 3. TRAVELER TABLE ──────────────────────────────────────────────────────
-  y += 34;
-
   doc.setFontSize(10);
+  doc.text('Mr. Book & Fly', 20, yPos);
+  yPos += 5;
+  doc.text('Website: www.mrbookandfly.shop', 20, yPos);
+  yPos += 5;
+  doc.text('Email: 92sweetflower@gmail.com', 20, yPos);
+  yPos += 5;
+  doc.text('Phone: +91 9056732633', 20, yPos);
+  
+  // === CUSTOMER INFO ===
+  yPos = 60;
   doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...BRAND_BLUE);
-  doc.text('Traveler Details', ML, y);
-  y += 4;
-
-  const isHealth = data.serviceType === 'health';
-  const head = isHealth
-    ? [['#', 'Full Name', 'Email', 'Phone']]
-    : [['#', 'Full Name', 'From → To', 'Departure', 'Return']];
-
-  const body: any[][] = travelers.length > 0
-    ? travelers.map((t: Traveler, i: number) => isHealth
-        ? [i + 1, t.fullName, t.email, t.phone]
-        : [i + 1, t.fullName,
-           `${t.departureCity || '—'} → ${t.destinationCity || '—'}`,
-           t.departureDate || '—',
-           t.returnDate    || '—'])
-    : [[1, data.customerName, data.customerEmail, data.customerPhone]];
-
-  const colWidths = isHealth
-    ? [10, 50, 75, 47]
-    : [10, 45, 60, 30, 37];
-
+  doc.setFontSize(11);
+  doc.text('Bill To:', 120, yPos);
+  yPos += 6;
+  
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.text(data.customerName, 120, yPos);
+  yPos += 5;
+  doc.text(data.customerEmail, 120, yPos);
+  yPos += 5;
+  doc.text(data.customerPhone, 120, yPos);
+  
+  // === SERVICE DETAILS TABLE ===
+  yPos = 100;
+  
+  const tableData = getServiceTableData(data.serviceType, data.serviceDetails, data.amount);
+  
   (doc as any).autoTable({
-    startY: y,
-    head,
-    body,
-    theme: 'plain',
+    startY: yPos,
+    head: [['Description', 'Details', 'Amount ($)']],
+    body: tableData,
+    theme: 'striped',
     headStyles: {
-      fillColor: ACCENT_BLUE,
-      textColor: WHITE,
+      fillColor: primaryColor,
+      textColor: 255,
       fontStyle: 'bold',
-      fontSize: 8.5,
-      cellPadding: { top: 5, bottom: 5, left: 5, right: 5 },
+      fontSize: 10
     },
-    bodyStyles: {
-      fontSize: 8.5,
-      textColor: DARK,
-      cellPadding: { top: 4, bottom: 4, left: 5, right: 5 },
-    },
-    alternateRowStyles: { fillColor: LIGHT_BLUE },
-    columnStyles: Object.fromEntries(colWidths.map((w, i) => [i, { cellWidth: w }])),
-    tableLineColor: BORDER_GREY,
-    tableLineWidth: 0.3,
-    margin: { left: ML, right: MR },
-  });
-
-  y = (doc as any).lastAutoTable.finalY + 8;
-
-  // ── 4. TOTALS ──────────────────────────────────────────────────────────────
-  const totX = ML + CW * 0.5;
-  const totW = CW * 0.5;
-
-  // Subtotal row
-  doc.setFontSize(8.5);
-  doc.setFont('helvetica', 'normal');
-  doc.setTextColor(...MID_GREY);
-  doc.text('Subtotal', totX + 4, y + 5);
-  doc.setTextColor(...DARK);
-  doc.text(`$${subtotal.toFixed(2)}`, totX + totW - 4, y + 5, { align: 'right' });
-
-  // GST row
-  doc.setTextColor(...MID_GREY);
-  doc.text('GST (18%)', totX + 4, y + 11);
-  doc.setTextColor(...DARK);
-  doc.text(`$${gst.toFixed(2)}`, totX + totW - 4, y + 11, { align: 'right' });
-
-  // Total banner
-  doc.setFillColor(...BRAND_BLUE);
-  doc.roundedRect(totX, y + 14, totW, 14, 2, 2, 'F');
-  doc.setTextColor(...WHITE);
-  doc.setFontSize(9);
-  doc.setFont('helvetica', 'bold');
-  doc.text('TOTAL AMOUNT', totX + 5, y + 23);
-  doc.setFontSize(12);
-  doc.text(`$${total.toFixed(2)}`, totX + totW - 5, y + 23, { align: 'right' });
-
-  y += 34;
-
-  // ── 5. PAYMENT INFORMATION ────────────────────────────────────────────────
-  doc.setFontSize(10);
-  doc.setFont('helvetica', 'bold');
-  doc.setTextColor(...BRAND_BLUE);
-  doc.text('Payment Information', ML, y);
-  y += 4;
-
-  (doc as any).autoTable({
-    startY: y,
-    body: [
-      ['Payment Method', 'UPI'],
-      ['UPI Reference',  data.upiReference],
-      ['Status',         'PAID ✓'],
-    ],
-    theme: 'plain',
-    bodyStyles: {
-      fontSize: 8.5,
-      cellPadding: { top: 4, bottom: 4, left: 8, right: 8 },
+    styles: {
+      fontSize: 9,
+      cellPadding: 3,
+      overflow: 'linebreak',
+      cellWidth: 'wrap'
     },
     columnStyles: {
-      0: { cellWidth: 50, fontStyle: 'bold', textColor: MID_GREY },
-      1: { cellWidth: CW - 50, textColor: DARK },
-    },
-    didParseCell: (hookData: any) => {
-      // Green text for PAID status
-      if (hookData.row.index === 2 && hookData.column.index === 1) {
-        hookData.cell.styles.textColor = [22, 163, 74];
-        hookData.cell.styles.fontStyle = 'bold';
-      }
-      // Light background
-      hookData.cell.styles.fillColor = LIGHT_GREY;
-    },
-    tableLineColor: BORDER_GREY,
-    tableLineWidth: 0.3,
-    margin: { left: ML, right: MR },
+      0: { cellWidth: 50 },
+      1: { cellWidth: 90 },
+      2: { cellWidth: 35, halign: 'right' }
+    }
   });
-
-  y = (doc as any).lastAutoTable.finalY + 8;
-
-  // ── 6. FOOTER ─────────────────────────────────────────────────────────────
-  // Line
-  doc.setDrawColor(...BORDER_GREY);
-  doc.setLineWidth(0.4);
-  doc.line(ML, y, PW - MR, y);
-  y += 6;
-
-  doc.setFontSize(8.5);
+  
+  // Get final Y position after table
+  yPos = (doc as any).lastAutoTable.finalY + 10;
+  
+  // === PAYMENT SUMMARY ===
+  const subtotal = data.amount;
+  const gst = data.gst || (subtotal * 0.18); // 18% GST
+  const total = subtotal + gst;
+  
+  // Draw summary box
+  const boxX = 125;
+  const boxY = yPos;
+  const boxWidth = 65;
+  
+  doc.setFillColor(...lightGray);
+  doc.rect(boxX, boxY, boxWidth, 28, 'F');
+  
+  doc.setFontSize(10);
   doc.setFont('helvetica', 'normal');
-  doc.setTextColor(...MID_GREY);
-  doc.text('Thank you for choosing Mr. Book & Fly!', PW / 2, y, { align: 'center' });
-  y += 5;
-  doc.text('For support: support@mrbookandfly.shop  |  www.mrbookandfly.shop', PW / 2, y, { align: 'center' });
-  y += 5;
-  doc.setFont('helvetica', 'italic');
-  doc.text('This is a computer-generated invoice.', PW / 2, y, { align: 'center' });
-
-  return doc;
-}
-
-function getServiceLabel(serviceType: string, details: any): string {
-  const map: Record<string, string> = {
-    flight: 'Dummy Flight Reservation',
-    hotel:  'Hotel Booking',
-    both:   'Flight + Hotel Package',
-    health: 'Health Insurance',
-  };
-  return details?.serviceName ?? map[serviceType] ?? serviceType;
-}
-
-export function downloadInvoice(doc: jsPDF, orderId: string): void {
-  doc.save(`Invoice_${orderId}_${Date.now()}.pdf`);
-}
-
-export function getInvoiceBlob(doc: jsPDF): Blob {
-  return doc.output('blob');
-}
-
-export function getInvoiceBase64(doc: jsPDF): string {
-  return doc.output('dataurlstring');
-}
+  doc.setTextColor(...darkColor);
+  doc.text('Subtotal:', boxX + 5, boxY + 8);
+  doc.text(`$${subtotal.toFixed(2)}`, boxX + boxWidth - 5, boxY + 8, { align: 'right' });
+  
+  doc.text('GST (18%):', boxX + 5, boxY + 15);
+  doc.text(`$${gst.toFixed(2)}`, boxX + boxWidth - 5, boxY + 15, { align: 'right' });
+  
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(12);
+  doc.text('Total:', boxX + 5, boxY + 24);
+  doc.text(`$${total.toFixed(2)}`, boxX + boxWidth - 5, boxY + 24, { align: 'right' });
+  
+  // === PAYMENT INFO ===
+  yPos += 35;
+  doc.setFontSize(11);
+  doc.setFont('helvetica', 'bold');
+  doc.text('Payment Information:', 20, yPos);
+  yPos += 6;
+  
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  doc.text('Payment Method: UPI', 20, yPos);
+  yPos += 5;
+  doc.text(`UPI Reference: ${data.upiReference}`, 20, yPos);
+  yPos += 
