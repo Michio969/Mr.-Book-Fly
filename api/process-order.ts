@@ -34,7 +34,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Create WhatsApp message
     const message = createWhatsAppMessage(order);
 
-    // Your WhatsApp Business number (REPLACE WITH YOUR ACTUAL NUMBER)
+    // Your WhatsApp Business number
     const whatsappNumber = '447877679344'; //
     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
