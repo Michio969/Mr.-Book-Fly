@@ -205,7 +205,8 @@ function getServiceTableData(serviceType: string, details: any, amount: number):
     });
     
     data.push([{ content: '', colSpan: 2 }, '']);
-    data.push(['Total Amount', '', amount.toFixed(2)]);
+    const inrAmount = (amount * 83).toFixed(2);
+    data.push(['Total Amount', '', `$${amount.toFixed(2)} / ₹${inrAmount}`]);
   } else {
     switch (serviceType) {
       case 'hotel':
