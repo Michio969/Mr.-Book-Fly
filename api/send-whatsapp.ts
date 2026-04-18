@@ -88,7 +88,7 @@ Amount: $${order.totalAmount}
 ━━━━━━━━━━━━━━━━━━━━
 📄 *Invoice generated and sent*
 📧 Support: 92sweetflower@gmail.com
-📱 WhatsApp: +91 9056732633
+📱 WhatsApp: +44 7877679344
 ⏳ Status: Pending Verification
   `.trim();
 }
