@@ -78,7 +78,7 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   yPos += 5;
   doc.text('Email: 92sweetflower@gmail.com', 20, yPos);
   yPos += 5;
-  doc.text('Phone: +44 7877679344', 20, yPos);
+  doc.text('Phone: +44 7877 679344', 20, yPos);
   
   yPos = 60;
   doc.setFont('helvetica', 'bold');
@@ -124,32 +124,31 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   
   yPos = (doc as any).lastAutoTable.finalY + 10;
   
-  const subtotal = data.amount;
-  const gst = data.gst || (subtotal * 0.18);
-  const total = subtotal + gst;
+  // === PAYMENT SUMMARY ===
+  const amountUSD = data.amount;
+  const amountINR = (amountUSD * 83).toFixed(2); // USD to INR conversion (approx 1 USD = 83 INR)
   
-  const boxX = 125;
+  // Draw summary box
+  const boxX = 115;
   const boxY = yPos;
-  const boxWidth = 65;
+  const boxWidth = 75;
   
   doc.setFillColor(...lightGray);
-  doc.rect(boxX, boxY, boxWidth, 28, 'F');
+  doc.rect(boxX, boxY, boxWidth, 22, 'F');
   
   doc.setFontSize(10);
-  doc.setFont('helvetica', 'normal');
-  doc.setTextColor(...darkColor);
-  doc.text('Subtotal:', boxX + 5, boxY + 8);
-  doc.text(`$${subtotal.toFixed(2)}`, boxX + boxWidth - 5, boxY + 8, { align: 'right' });
-  
-  doc.text('GST (18%):', boxX + 5, boxY + 15);
-  doc.text(`$${gst.toFixed(2)}`, boxX + boxWidth - 5, boxY + 15, { align: 'right' });
-  
   doc.setFont('helvetica', 'bold');
-  doc.setFontSize(12);
-  doc.text('Total:', boxX + 5, boxY + 24);
-  doc.text(`$${total.toFixed(2)}`, boxX + boxWidth - 5, boxY + 24, { align: 'right' });
+  doc.setTextColor(...darkColor);
+  doc.text('Total Amount:', boxX + 5, boxY + 8);
   
-  yPos += 35;
+  doc.setFontSize(11);
+  doc.setFont('helvetica', 'bold');
+  doc.text(`$${amountUSD.toFixed(2)} USD`, boxX + 5, boxY + 15);
+  doc.setFontSize(10);
+  doc.setFont('helvetica', 'normal');
+  doc.text(`(₹${amountINR} INR)`, boxX + 5, boxY + 20);
+  
+  yPos += 28;
   doc.setFontSize(11);
   doc.setFont('helvetica', 'bold');
   doc.text('Payment Information:', 20, yPos);
@@ -176,7 +175,7 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   doc.setFont('helvetica', 'italic');
   doc.text('Thank you for choosing Mr. Book & Fly!', 105, yPos + 8, { align: 'center' });
   doc.text('For support, contact: 92sweetflower@gmail.com', 105, yPos + 13, { align: 'center' });
-  doc.text('WhatsApp: +44 7877679344', 105, yPos + 18, { align: 'center' });
+  doc.text('WhatsApp: +44 7877 679344', 105, yPos + 18, { align: 'center' });
   doc.text('This is a computer-generated invoice.', 105, yPos + 23, { align: 'center' });
   
   return doc;
