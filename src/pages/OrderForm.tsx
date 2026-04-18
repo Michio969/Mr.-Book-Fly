@@ -176,7 +176,7 @@ export default function OrderForm() {
         `❌ Error: ${error.message}\n\n` +
         `Please try again or contact support:\n` +
         `📧 92sweetflower@gmail.com\n` +
-        `📱 +91 9056732633`
+        `📱 +44 7877679344`
       );
     } finally {
       setIsProcessing(false);
@@ -406,7 +406,7 @@ export default function OrderForm() {
                 size="lg"
                 onClick={() => {
                   window.open(
-                    `https://wa.me/919056732633?text=Hi, I need help with booking`,
+                    `https://wa.me/447877679344?text=Hi, I need help with booking`,
                     '_blank'
                   );
                 }}
