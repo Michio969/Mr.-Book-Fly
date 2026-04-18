@@ -159,7 +159,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     y += 26;
 
     doc.font('Helvetica').fontSize(8).fillColor(MID_GREY)
-       .text('For support: support@mrbookandfly.shop  |  www.mrbookandfly.shop', ML, y, {
+       .text('For support: 92sweetflower@gmail.com  |  www.mrbookandfly.shop', ML, y, {
          align: 'center', width: CW
        });
 
