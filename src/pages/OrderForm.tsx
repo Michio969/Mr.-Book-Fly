@@ -428,17 +428,6 @@ export default function OrderForm() {
               </p>
             </div>
 
-            <div className="text-center mb-6">
-              <img
-                src="/upi-qr.png"
-                alt="UPI QR Code"
-                className="w-64 h-64 mx-auto border-2 border-gray-300 rounded-lg"
-              />
-              <p className="text-sm text-gray-600 mt-2">
-                Scan with any UPI app to pay
-              </p>
-            </div>
-
             <div className="mb-6">
               <Label>UPI Reference Number (12 digits) *</Label>
               <Input
