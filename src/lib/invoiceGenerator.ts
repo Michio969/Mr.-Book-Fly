@@ -78,7 +78,7 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   yPos += 5;
   doc.text('Email: 92sweetflower@gmail.com', 20, yPos);
   yPos += 5;
-  doc.text('Phone: +91 9056732633', 20, yPos);
+  doc.text('Phone: +44 7877679344', 20, yPos);
   
   yPos = 60;
   doc.setFont('helvetica', 'bold');
@@ -176,7 +176,7 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   doc.setFont('helvetica', 'italic');
   doc.text('Thank you for choosing Mr. Book & Fly!', 105, yPos + 8, { align: 'center' });
   doc.text('For support, contact: 92sweetflower@gmail.com', 105, yPos + 13, { align: 'center' });
-  doc.text('WhatsApp: +91 9056732633', 105, yPos + 18, { align: 'center' });
+  doc.text('WhatsApp: +44 7877679344', 105, yPos + 18, { align: 'center' });
   doc.text('This is a computer-generated invoice.', 105, yPos + 23, { align: 'center' });
   
   return doc;
