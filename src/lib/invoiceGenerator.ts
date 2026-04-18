@@ -20,9 +20,9 @@ interface InvoiceData {
   customerEmail: string;
   customerPhone: string;
   amount: number;
-  upiReference: string;
+  upiReference?: string;
   serviceDetails: any;
-  gst?: number;
+  paid?: boolean; // true = PAID (OrderForm), false/undefined = UNPAID (other pages)
 }
 
 // ─── Colors ───────────────────────────────────────────────────────────────────
@@ -35,11 +35,14 @@ const DARK        = [ 30,  41,  59];
 const WHITE       = [255, 255, 255];
 const BORDER_GREY = [226, 232, 240];
 const GREEN       = [22,  163,  74];
+const RED         = [220,  38,  38];
 
-const PAGE_W = 210;
-const ML     = 14;
-const MR     = 14;
-const CW     = PAGE_W - ML - MR; // 182mm usable width
+const PAGE_W  = 210;
+const ML      = 14;
+const MR      = 14;
+const CW      = PAGE_W - ML - MR; // 182mm usable
+
+const USD_TO_INR = 83; // approximate conversion rate
 
 function getServiceLabel(serviceType: string, details: any): string {
   const map: Record<string, string> = {
@@ -55,16 +58,17 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   const doc = new jsPDF({ unit: 'mm', format: 'a4' });
 
   const travelers: Traveler[] = data.serviceDetails?.travelers ?? [];
-  const subtotal = data.amount;
-  const gst      = data.gst ?? parseFloat((subtotal * 0.18).toFixed(2));
-  const total    = parseFloat((subtotal + gst).toFixed(2));
+  const isPaid   = data.paid === true;
+  const amountUSD = data.amount;
+  const amountINR = (amountUSD * USD_TO_INR).toFixed(0);
 
   // ════════════════════════════════════════════════════════
   // 1. HEADER BANNER
   // ════════════════════════════════════════════════════════
   doc.setFillColor(...BRAND_BLUE);
-  doc.rect(0, 0, PAGE_W, 40, 'F');
+  doc.rect(0, 0, PAGE_W, 42, 'F');
 
+  // — Left: company info —
   doc.setTextColor(...WHITE);
   doc.setFontSize(20);
   doc.setFont('helvetica', 'bold');
@@ -73,31 +77,54 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   doc.setFontSize(8);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(191, 215, 255);
-  doc.text('100% Embassy Acceptable Bookings', ML, 20);
-  doc.text('www.mrbookandfly.shop  |  support@mrbookandfly.shop', ML, 27);
-  doc.text('WhatsApp: +44 7877 679344', ML, 34);
+  doc.text('100% Embassy Acceptable Bookings', ML, 21);
+  doc.text('www.mrbookandfly.shop  |  support@mrbookandfly.shop', ML, 29);
+  doc.text('WhatsApp: +44 7877 679344', ML, 37);
 
+  // — Right: INVOICE title —
   doc.setTextColor(...WHITE);
   doc.setFontSize(20);
   doc.setFont('helvetica', 'bold');
   doc.text('INVOICE', PAGE_W - MR, 13, { align: 'right' });
 
-  doc.setFontSize(7.5);
+  // Invoice # label + value on same line (right-aligned, offset left for value)
+  doc.setFontSize(8);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(191, 215, 255);
-  doc.text('Invoice #', PAGE_W - MR, 22, { align: 'right' });
-  doc.text('Date Issued', PAGE_W - MR, 29, { align: 'right' });
-
-  doc.setFont('helvetica', 'bold');
+  doc.text('Invoice #:', PAGE_W - MR - 55, 23);
   doc.setTextColor(...WHITE);
-  doc.setFontSize(7.5);
-  doc.text(data.orderId, PAGE_W - MR - 22, 22);
-  doc.text(data.date,    PAGE_W - MR - 22, 29);
+  doc.setFont('helvetica', 'bold');
+  doc.text(data.orderId, PAGE_W - MR, 23, { align: 'right' });
+
+  // Date label + value on same line
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(191, 215, 255);
+  doc.text('Date:', PAGE_W - MR - 55, 31);
+  doc.setTextColor(...WHITE);
+  doc.setFont('helvetica', 'bold');
+  doc.text(data.date, PAGE_W - MR, 31, { align: 'right' });
+
+  // UNPAID / PAID badge
+  if (!isPaid) {
+    doc.setFillColor(220, 38, 38);
+    doc.roundedRect(PAGE_W - MR - 22, 35, 22, 7, 1, 1, 'F');
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(...WHITE);
+    doc.text('UNPAID', PAGE_W - MR - 11, 40, { align: 'center' });
+  } else {
+    doc.setFillColor(...GREEN);
+    doc.roundedRect(PAGE_W - MR - 18, 35, 18, 7, 1, 1, 'F');
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(...WHITE);
+    doc.text('PAID', PAGE_W - MR - 9, 40, { align: 'center' });
+  }
 
   // ════════════════════════════════════════════════════════
   // 2. BILLED TO  +  SERVICE DETAILS
   // ════════════════════════════════════════════════════════
-  let y = 46;
+  let y = 48;
   const halfW = (CW - 6) / 2;
 
   // Left — Billed To
@@ -110,7 +137,7 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   doc.setFontSize(9);
   doc.setFont('helvetica', 'bold');
   doc.setTextColor(...DARK);
-  doc.text(data.customerName,  ML + 5, y + 13);
+  doc.text(data.customerName, ML + 5, y + 13);
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.5);
   doc.text(data.customerEmail, ML + 5, y + 20);
@@ -134,12 +161,12 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   doc.setFontSize(8.5);
   doc.text(`Travelers: ${travelers.length || 1}`, rx + 5, y + 20);
   const pricePerPerson = travelers.length > 0
-    ? (data.amount / travelers.length).toFixed(2)
-    : data.amount.toFixed(2);
+    ? (amountUSD / travelers.length).toFixed(2)
+    : amountUSD.toFixed(2);
   doc.text(`$${pricePerPerson} per person`, rx + 5, y + 27);
 
   // ════════════════════════════════════════════════════════
-  // 3. TRAVELER TABLE — different columns per service
+  // 3. TRAVELER TABLE — per service type
   // ════════════════════════════════════════════════════════
   y += 36;
 
@@ -153,7 +180,6 @@ export function generateInvoice(data: InvoiceData): jsPDF {
     fillColor: ACCENT_BLUE,
     textColor: WHITE,
     fontStyle: 'bold',
-    fontSize: 8.5,
     cellPadding: { top: 5, bottom: 5, left: 4, right: 4 },
   };
   const baseBodyStyles = {
@@ -169,17 +195,11 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   };
 
   if (data.serviceType === 'health') {
-    // ── HEALTH: # | Full Name | Email | Phone ────────────────────────────
     (doc as any).autoTable({
       ...tableOptions,
       startY: y,
       head: [['#', 'Full Name', 'Email', 'Phone']],
-      body: travelers.map((t, i) => [
-        String(i + 1),
-        t.fullName  || '—',
-        t.email     || '—',
-        t.phone     || '—',
-      ]),
+      body: travelers.map((t, i) => [String(i + 1), t.fullName || '—', t.email || '—', t.phone || '—']),
       headStyles: { ...baseHeadStyles, fontSize: 8.5 },
       bodyStyles: { ...baseBodyStyles, fontSize: 8.5 },
       columnStyles: {
@@ -191,18 +211,17 @@ export function generateInvoice(data: InvoiceData): jsPDF {
     });
 
   } else if (data.serviceType === 'flight') {
-    // ── FLIGHT: # | Full Name | From | To | Departure | Return ──────────
     (doc as any).autoTable({
       ...tableOptions,
       startY: y,
       head: [['#', 'Full Name', 'From', 'To', 'Departure', 'Return']],
       body: travelers.map((t, i) => [
         String(i + 1),
-        t.fullName        || '—',
-        t.departureCity   || '—',
+        t.fullName || '—',
+        t.departureCity || '—',
         t.destinationCity || '—',
-        t.departureDate   || '—',
-        t.returnDate      || '—',
+        t.departureDate || '—',
+        t.returnDate || '—',
       ]),
       headStyles: { ...baseHeadStyles, fontSize: 8 },
       bodyStyles: { ...baseBodyStyles, fontSize: 8 },
@@ -217,18 +236,17 @@ export function generateInvoice(data: InvoiceData): jsPDF {
     });
 
   } else if (data.serviceType === 'hotel') {
-    // ── HOTEL: # | Full Name | Email | Phone | City | Date ──────────────
     (doc as any).autoTable({
       ...tableOptions,
       startY: y,
       head: [['#', 'Full Name', 'Email', 'Phone', 'City', 'Date']],
       body: travelers.map((t, i) => [
         String(i + 1),
-        t.fullName        || '—',
-        t.email           || '—',
-        t.phone           || '—',
+        t.fullName || '—',
+        t.email || '—',
+        t.phone || '—',
         t.destinationCity || '—',
-        t.departureDate   || '—',
+        t.departureDate || '—',
       ]),
       headStyles: { ...baseHeadStyles, fontSize: 8 },
       bodyStyles: { ...baseBodyStyles, fontSize: 8 },
@@ -243,9 +261,6 @@ export function generateInvoice(data: InvoiceData): jsPDF {
     });
 
   } else if (data.serviceType === 'both') {
-    // ── BOTH: Two separate tables — Flight then Hotel ────────────────────
-
-    // Flight table
     doc.setFontSize(9);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(...DARK);
@@ -258,11 +273,11 @@ export function generateInvoice(data: InvoiceData): jsPDF {
       head: [['#', 'Full Name', 'From', 'To', 'Departure', 'Return']],
       body: travelers.map((t, i) => [
         String(i + 1),
-        t.fullName        || '—',
-        t.departureCity   || '—',
+        t.fullName || '—',
+        t.departureCity || '—',
         t.destinationCity || '—',
-        t.departureDate   || '—',
-        t.returnDate      || '—',
+        t.departureDate || '—',
+        t.returnDate || '—',
       ]),
       headStyles: { ...baseHeadStyles, fontSize: 8 },
       bodyStyles: { ...baseBodyStyles, fontSize: 8 },
@@ -277,8 +292,6 @@ export function generateInvoice(data: InvoiceData): jsPDF {
     });
 
     y = (doc as any).lastAutoTable.finalY + 6;
-
-    // Hotel table
     doc.setFontSize(9);
     doc.setFont('helvetica', 'bold');
     doc.setTextColor(...DARK);
@@ -291,9 +304,9 @@ export function generateInvoice(data: InvoiceData): jsPDF {
       head: [['#', 'Full Name', 'Email', 'Phone', 'Destination']],
       body: travelers.map((t, i) => [
         String(i + 1),
-        t.fullName        || '—',
-        t.email           || '—',
-        t.phone           || '—',
+        t.fullName || '—',
+        t.email || '—',
+        t.phone || '—',
         t.destinationCity || '—',
       ]),
       headStyles: { ...baseHeadStyles, fontSize: 8 },
@@ -309,38 +322,44 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   }
 
   // ════════════════════════════════════════════════════════
-  // 4. TOTALS
+  // 4. AMOUNT SECTION — USD + INR (no GST)
   // ════════════════════════════════════════════════════════
-  y = (doc as any).lastAutoTable.finalY + 8;
+  y = (doc as any).lastAutoTable.finalY + 10;
 
-  const totX = ML + CW * 0.52;
-  const totW = CW * 0.48;
+  const totX = ML + CW * 0.50;
+  const totW = CW * 0.50;
 
+  // USD row
   doc.setFontSize(8.5);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(...MID_GREY);
-  doc.text('Subtotal', totX + 4, y + 5);
+  doc.text('Amount (USD)', totX + 4, y + 5);
   doc.setTextColor(...DARK);
-  doc.text(`$${subtotal.toFixed(2)}`, totX + totW - 4, y + 5, { align: 'right' });
+  doc.setFont('helvetica', 'bold');
+  doc.text(`$${amountUSD.toFixed(2)}`, totX + totW - 4, y + 5, { align: 'right' });
 
+  // INR row
+  doc.setFont('helvetica', 'normal');
   doc.setTextColor(...MID_GREY);
-  doc.text('GST (18%)', totX + 4, y + 11);
+  doc.text(`Amount (INR ~ 1 USD = ₹${USD_TO_INR})`, totX + 4, y + 12);
   doc.setTextColor(...DARK);
-  doc.text(`$${gst.toFixed(2)}`, totX + totW - 4, y + 11, { align: 'right' });
+  doc.setFont('helvetica', 'bold');
+  doc.text(`₹${amountINR}`, totX + totW - 4, y + 12, { align: 'right' });
 
+  // Total banner
   doc.setFillColor(...BRAND_BLUE);
-  doc.roundedRect(totX, y + 14, totW, 13, 2, 2, 'F');
+  doc.roundedRect(totX, y + 15, totW, 14, 2, 2, 'F');
   doc.setTextColor(...WHITE);
   doc.setFontSize(9);
   doc.setFont('helvetica', 'bold');
-  doc.text('TOTAL AMOUNT', totX + 5, y + 22);
-  doc.setFontSize(11);
-  doc.text(`$${total.toFixed(2)}`, totX + totW - 5, y + 22, { align: 'right' });
+  doc.text('TOTAL AMOUNT', totX + 5, y + 24);
+  doc.setFontSize(12);
+  doc.text(`$${amountUSD.toFixed(2)} / ₹${amountINR}`, totX + totW - 5, y + 24, { align: 'right' });
 
-  y += 32;
+  y += 34;
 
   // ════════════════════════════════════════════════════════
-  // 5. PAYMENT INFORMATION
+  // 5. PAYMENT STATUS SECTION
   // ════════════════════════════════════════════════════════
   doc.setFontSize(10);
   doc.setFont('helvetica', 'bold');
@@ -348,32 +367,58 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   doc.text('Payment Information', ML, y);
   y += 4;
 
-  (doc as any).autoTable({
-    startY: y,
-    body: [
-      ['Payment Method', 'UPI'],
-      ['UPI Reference',  data.upiReference],
-      ['Status',         'PAID ✓'],
-    ],
-    theme: 'plain',
-    bodyStyles: {
-      fontSize: 8.5,
-      cellPadding: { top: 4, bottom: 4, left: 8, right: 8 },
-    },
-    columnStyles: {
-      0: { cellWidth: 50, fontStyle: 'bold', textColor: MID_GREY, fillColor: LIGHT_GREY },
-      1: { cellWidth: CW - 50, textColor: DARK, fillColor: LIGHT_GREY },
-    },
-    didParseCell: (hookData: any) => {
-      if (hookData.row.index === 2 && hookData.column.index === 1) {
-        hookData.cell.styles.textColor = GREEN;
-        hookData.cell.styles.fontStyle = 'bold';
-      }
-    },
-    tableLineColor: BORDER_GREY,
-    tableLineWidth: 0.3,
-    margin: { left: ML, right: MR },
-  });
+  if (isPaid && data.upiReference) {
+    // PAID — show UPI reference
+    (doc as any).autoTable({
+      startY: y,
+      body: [
+        ['Payment Method', 'UPI'],
+        ['UPI Reference',  data.upiReference],
+        ['Status',         'PAID ✓'],
+      ],
+      theme: 'plain',
+      bodyStyles: { fontSize: 8.5, cellPadding: { top: 4, bottom: 4, left: 8, right: 8 } },
+      columnStyles: {
+        0: { cellWidth: 50, fontStyle: 'bold', textColor: MID_GREY, fillColor: LIGHT_GREY },
+        1: { cellWidth: CW - 50, textColor: DARK, fillColor: LIGHT_GREY },
+      },
+      didParseCell: (hookData: any) => {
+        if (hookData.row.index === 2 && hookData.column.index === 1) {
+          hookData.cell.styles.textColor = GREEN;
+          hookData.cell.styles.fontStyle = 'bold';
+        }
+      },
+      tableLineColor: BORDER_GREY,
+      tableLineWidth: 0.3,
+      margin: { left: ML, right: MR },
+    });
+  } else {
+    // UNPAID — instructions to pay via WhatsApp
+    (doc as any).autoTable({
+      startY: y,
+      body: [
+        ['Status',           'UNPAID — Payment Pending'],
+        ['How to Pay',       'Send this invoice on WhatsApp to complete your booking'],
+        ['WhatsApp',         '+44 7877 679344'],
+        ['Payment Methods',  'UPI / Bank Transfer / Other (confirm with agent)'],
+      ],
+      theme: 'plain',
+      bodyStyles: { fontSize: 8.5, cellPadding: { top: 4, bottom: 4, left: 8, right: 8 } },
+      columnStyles: {
+        0: { cellWidth: 50, fontStyle: 'bold', textColor: MID_GREY, fillColor: LIGHT_GREY },
+        1: { cellWidth: CW - 50, textColor: DARK, fillColor: LIGHT_GREY },
+      },
+      didParseCell: (hookData: any) => {
+        if (hookData.row.index === 0 && hookData.column.index === 1) {
+          hookData.cell.styles.textColor = RED;
+          hookData.cell.styles.fontStyle = 'bold';
+        }
+      },
+      tableLineColor: BORDER_GREY,
+      tableLineWidth: 0.3,
+      margin: { left: ML, right: MR },
+    });
+  }
 
   y = (doc as any).lastAutoTable.finalY + 8;
 
@@ -393,7 +438,7 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   doc.text('For support: 92sweetflower@gmail.com  |  WhatsApp: +44 7877 679344', PAGE_W / 2, y, { align: 'center' });
   y += 5;
   doc.setFont('helvetica', 'italic');
-  doc.text('This is a computer-generated invoice.', PAGE_W / 2, y, { align: 'center' });
+  doc.text('This is a computer-generated document. Please contact us on WhatsApp to complete payment.', PAGE_W / 2, y, { align: 'center' });
 
   return doc;
 }
