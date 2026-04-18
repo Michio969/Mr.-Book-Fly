@@ -322,41 +322,62 @@ export function generateInvoice(data: InvoiceData): jsPDF {
   }
 
   // ════════════════════════════════════════════════════════
-  // 4. AMOUNT SECTION — USD + INR (no GST)
+  // 4. AMOUNT SECTION — Full-width, clean layout
   // ════════════════════════════════════════════════════════
   y = (doc as any).lastAutoTable.finalY + 10;
 
-  const totX = ML + CW * 0.50;
-  const totW = CW * 0.50;
+  // Use full content width for the amount box
+  const amtX = ML;
+  const amtW = CW;
+  const rowH = 9;
+  const bannerH = 14;
 
-  // USD row
+  // Light background for USD row
+  doc.setFillColor(...LIGHT_GREY);
+  doc.setDrawColor(...BORDER_GREY);
+  doc.setLineWidth(0.3);
+  doc.roundedRect(amtX, y, amtW, rowH, 1, 1, 'FD');
+
   doc.setFontSize(8.5);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(...MID_GREY);
-  doc.text('Amount (USD)', totX + 4, y + 5);
+  doc.text('Amount (USD)', amtX + 5, y + 6);
   doc.setTextColor(...DARK);
   doc.setFont('helvetica', 'bold');
-  doc.text(`$${amountUSD.toFixed(2)}`, totX + totW - 4, y + 5, { align: 'right' });
+  doc.text(`$${amountUSD.toFixed(2)}`, amtX + amtW - 5, y + 6, { align: 'right' });
 
-  // INR row
+  y += rowH;
+
+  // Light background for INR row
+  doc.setFillColor(...LIGHT_BLUE);
+  doc.setDrawColor(...BORDER_GREY);
+  doc.roundedRect(amtX, y, amtW, rowH, 1, 1, 'FD');
+
+  doc.setFontSize(8.5);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(...MID_GREY);
-  doc.text(`Amount (INR ~ 1 USD = ₹${USD_TO_INR})`, totX + 4, y + 12);
+  doc.text(`Amount (INR ~ 1 USD = Rs.${USD_TO_INR})`, amtX + 5, y + 6);
   doc.setTextColor(...DARK);
   doc.setFont('helvetica', 'bold');
-  doc.text(`₹${amountINR}`, totX + totW - 4, y + 12, { align: 'right' });
+  doc.text(`Rs.${amountINR}`, amtX + amtW - 5, y + 6, { align: 'right' });
 
-  // Total banner
+  y += rowH + 2;
+
+  // TOTAL banner — full width, brand blue
   doc.setFillColor(...BRAND_BLUE);
-  doc.roundedRect(totX, y + 15, totW, 14, 2, 2, 'F');
+  doc.roundedRect(amtX, y, amtW, bannerH, 2, 2, 'F');
   doc.setTextColor(...WHITE);
-  doc.setFontSize(9);
+  doc.setFontSize(9.5);
   doc.setFont('helvetica', 'bold');
-  doc.text('TOTAL AMOUNT', totX + 5, y + 24);
-  doc.setFontSize(12);
-  doc.text(`$${amountUSD.toFixed(2)} / ₹${amountINR}`, totX + totW - 5, y + 24, { align: 'right' });
+  doc.text('TOTAL AMOUNT', amtX + 6, y + 9);
+  // Right side: USD bold, INR smaller
+  doc.setFontSize(11);
+  doc.text(`$${amountUSD.toFixed(2)}`, amtX + amtW - 6, y + 9, { align: 'right' });
+  doc.setFontSize(8);
+  doc.setTextColor(191, 215, 255);
+  doc.text(`(Rs.${amountINR})`, amtX + amtW - 6, y + 13, { align: 'right' });
 
-  y += 34;
+  y += bannerH + 10;
 
   // ════════════════════════════════════════════════════════
   // 5. PAYMENT STATUS SECTION
@@ -374,7 +395,7 @@ export function generateInvoice(data: InvoiceData): jsPDF {
       body: [
         ['Payment Method', 'UPI'],
         ['UPI Reference',  data.upiReference],
-        ['Status',         'PAID ✓'],
+        ['Status',         'PAID'],
       ],
       theme: 'plain',
       bodyStyles: { fontSize: 8.5, cellPadding: { top: 4, bottom: 4, left: 8, right: 8 } },
