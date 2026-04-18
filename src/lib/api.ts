@@ -66,7 +66,7 @@ export async function processOrder(orderData: any, upiReference: string) {
 
     // Create WhatsApp message
     const message = createWhatsAppMessage(orderData, orderId, upiReference, orderDate);
-    const whatsappURL = `https://wa.me/919056732633?text=${encodeURIComponent(message)}`;
+    const whatsappURL = `https://wa.me/447877679344?text=${encodeURIComponent(message)}`;
 
     console.log('✅ WhatsApp URL created');
 
@@ -127,7 +127,7 @@ function createWhatsAppMessage(orderData: any, orderId: string, upiRef: string, 
   message += `━━━━━━━━━━━━━━━━━━━━\n`;
   message += `📄 Invoice downloaded\n`;
   message += `📧 92sweetflower@gmail.com\n`;
-  message += `📱 +91 9056732633\n`;
+  message += `📱 +44 7877679344\n`;
   message += `⏳ Status: Pending Verification`;
 
   return message;
