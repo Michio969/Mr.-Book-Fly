@@ -16,19 +16,177 @@ const generateOrderId = () => {
 }
 
 const WORLD_CITIES = [
-  "Paris, France", "London, United Kingdom", "New York, USA", "Dubai, UAE",
-  "Tokyo, Japan", "Singapore", "Sydney, Australia", "Rome, Italy",
-  "Barcelona, Spain", "Amsterdam, Netherlands", "Berlin, Germany", "Vienna, Austria",
-  "Prague, Czech Republic", "Budapest, Hungary", "Istanbul, Turkey", "Athens, Greece",
-  "Lisbon, Portugal", "Madrid, Spain", "Brussels, Belgium", "Zurich, Switzerland",
-  "Copenhagen, Denmark", "Stockholm, Sweden", "Oslo, Norway", "Helsinki, Finland",
-  "Mumbai, India", "New Delhi, India", "Bangalore, India", "Chennai, India",
+  // 🇬🇧 United Kingdom
+  "London, United Kingdom", "Manchester, United Kingdom", "Birmingham, United Kingdom",
+  "Edinburgh, United Kingdom", "Glasgow, United Kingdom", "Liverpool, United Kingdom",
+  "Bristol, United Kingdom", "Leeds, United Kingdom", "Sheffield, United Kingdom",
+  "Newcastle, United Kingdom", "Nottingham, United Kingdom", "Cardiff, Wales",
+  "Belfast, Northern Ireland", "Oxford, United Kingdom", "Cambridge, United Kingdom",
+
+  // 🇺🇸 United States
+  "New York, USA", "Los Angeles, USA", "Chicago, USA", "Miami, USA",
+  "San Francisco, USA", "Las Vegas, USA", "Washington DC, USA", "Boston, USA",
+  "Seattle, USA", "Houston, USA", "Dallas, USA", "Atlanta, USA",
+  "Orlando, USA", "Phoenix, USA", "Denver, USA", "New Orleans, USA",
+  "Nashville, USA", "Honolulu, USA", "Portland, USA", "San Diego, USA",
+
+  // 🇨🇦 Canada
+  "Toronto, Canada", "Vancouver, Canada", "Montreal, Canada", "Calgary, Canada",
+  "Ottawa, Canada", "Quebec City, Canada", "Edmonton, Canada", "Winnipeg, Canada",
+
+  // 🇲🇽 Mexico & Central America
+  "Mexico City, Mexico", "Cancun, Mexico", "Guadalajara, Mexico", "Monterrey, Mexico",
+  "Playa del Carmen, Mexico", "Tulum, Mexico", "San Jose, Costa Rica", "Panama City, Panama",
+
+  // 🇧🇷 South America
+  "Rio de Janeiro, Brazil", "São Paulo, Brazil", "Buenos Aires, Argentina",
+  "Lima, Peru", "Bogotá, Colombia", "Cartagena, Colombia", "Medellín, Colombia",
+  "Santiago, Chile", "Montevideo, Uruguay", "Quito, Ecuador", "La Paz, Bolivia",
+  "Cusco, Peru", "Caracas, Venezuela", "Asunción, Paraguay",
+
+  // 🇫🇷 France
+  "Paris, France", "Nice, France", "Lyon, France", "Marseille, France",
+  "Bordeaux, France", "Toulouse, France", "Strasbourg, France", "Cannes, France",
+
+  // 🇩🇪 Germany
+  "Berlin, Germany", "Munich, Germany", "Frankfurt, Germany", "Hamburg, Germany",
+  "Cologne, Germany", "Stuttgart, Germany", "Düsseldorf, Germany", "Dresden, Germany",
+
+  // 🇮🇹 Italy
+  "Rome, Italy", "Milan, Italy", "Venice, Italy", "Florence, Italy",
+  "Naples, Italy", "Turin, Italy", "Bologna, Italy", "Amalfi, Italy",
+  "Palermo, Italy", "Verona, Italy", "Pisa, Italy",
+
+  // 🇪🇸 Spain
+  "Barcelona, Spain", "Madrid, Spain", "Seville, Spain", "Valencia, Spain",
+  "Malaga, Spain", "Bilbao, Spain", "Granada, Spain", "Ibiza, Spain",
+  "Palma de Mallorca, Spain", "San Sebastián, Spain",
+
+  // 🇳🇱 Netherlands & Belgium
+  "Amsterdam, Netherlands", "Rotterdam, Netherlands", "The Hague, Netherlands",
+  "Brussels, Belgium", "Bruges, Belgium", "Ghent, Belgium", "Antwerp, Belgium",
+
+  // 🇨🇭 Switzerland & Austria
+  "Zurich, Switzerland", "Geneva, Switzerland", "Basel, Switzerland", "Bern, Switzerland",
+  "Interlaken, Switzerland", "Vienna, Austria", "Salzburg, Austria", "Innsbruck, Austria",
+
+  // 🇵🇹 Portugal
+  "Lisbon, Portugal", "Porto, Portugal", "Faro, Portugal", "Funchal (Madeira), Portugal",
+
+  // 🇬🇷 Greece
+  "Athens, Greece", "Santorini, Greece", "Mykonos, Greece", "Thessaloniki, Greece",
+  "Rhodes, Greece", "Crete, Greece", "Corfu, Greece",
+
+  // 🇹🇷 Turkey
+  "Istanbul, Turkey", "Ankara, Turkey", "Antalya, Turkey", "Cappadocia, Turkey",
+  "Bodrum, Turkey", "Izmir, Turkey",
+
+  // 🇸🇪 Scandinavia
+  "Stockholm, Sweden", "Gothenburg, Sweden", "Malmö, Sweden",
+  "Oslo, Norway", "Bergen, Norway", "Tromsø, Norway",
+  "Copenhagen, Denmark", "Aarhus, Denmark",
+  "Helsinki, Finland", "Tampere, Finland", "Reykjavik, Iceland",
+
+  // 🇵🇱 Eastern Europe
+  "Warsaw, Poland", "Krakow, Poland", "Gdansk, Poland", "Wroclaw, Poland",
+  "Prague, Czech Republic", "Brno, Czech Republic",
+  "Budapest, Hungary", "Debrecen, Hungary",
+  "Bucharest, Romania", "Cluj-Napoca, Romania",
+  "Sofia, Bulgaria", "Plovdiv, Bulgaria",
+  "Zagreb, Croatia", "Dubrovnik, Croatia", "Split, Croatia",
+  "Ljubljana, Slovenia", "Bratislava, Slovakia",
+  "Tallinn, Estonia", "Riga, Latvia", "Vilnius, Lithuania",
+  "Kyiv, Ukraine", "Lviv, Ukraine",
+  "Belgrade, Serbia", "Sarajevo, Bosnia", "Tirana, Albania",
+  "Skopje, North Macedonia", "Podgorica, Montenegro",
+
+  // 🇷🇺 Russia & CIS
+  "Moscow, Russia", "St. Petersburg, Russia", "Novosibirsk, Russia",
+  "Tbilisi, Georgia", "Yerevan, Armenia", "Baku, Azerbaijan",
+  "Almaty, Kazakhstan", "Tashkent, Uzbekistan",
+
+  // 🇦🇪 Middle East
+  "Dubai, UAE", "Abu Dhabi, UAE", "Sharjah, UAE",
+  "Doha, Qatar", "Riyadh, Saudi Arabia", "Jeddah, Saudi Arabia", "Mecca, Saudi Arabia",
+  "Kuwait City, Kuwait", "Manama, Bahrain", "Muscat, Oman", "Salalah, Oman",
+  "Amman, Jordan", "Petra, Jordan", "Beirut, Lebanon", "Tel Aviv, Israel",
+  "Jerusalem, Israel", "Baghdad, Iraq", "Tehran, Iran",
+
+  // 🇮🇳 India
+  "New Delhi, India", "Mumbai, India", "Bangalore, India", "Chennai, India",
   "Kolkata, India", "Hyderabad, India", "Goa, India", "Jaipur, India",
-  "Bangkok, Thailand", "Phuket, Thailand", "Bali, Indonesia", "Kuala Lumpur, Malaysia",
-  "Manila, Philippines", "Seoul, South Korea", "Beijing, China", "Shanghai, China",
-  "Toronto, Canada", "Vancouver, Canada", "Los Angeles, USA", "San Francisco, USA",
-  "Chicago, USA", "Miami, USA", "Doha, Qatar", "Riyadh, Saudi Arabia",
-  "Cairo, Egypt", "Nairobi, Kenya", "Johannesburg, South Africa", "Cape Town, South Africa",
+  "Ahmedabad, India", "Pune, India", "Agra, India", "Varanasi, India",
+  "Udaipur, India", "Jodhpur, India", "Amritsar, India", "Kochi, India",
+  "Thiruvananthapuram, India", "Shimla, India", "Manali, India", "Darjeeling, India",
+  "Rishikesh, India", "Haridwar, India", "Mysore, India", "Coimbatore, India",
+  "Chandigarh, India", "Lucknow, India", "Bhopal, India", "Indore, India",
+  "Srinagar, India", "Leh, India", "Dehradun, India", "Nainital, India",
+  "Andaman & Nicobar Islands, India", "Lakshadweep, India",
+
+  // 🇵🇰 Pakistan & Sri Lanka & Bangladesh
+  "Karachi, Pakistan", "Lahore, Pakistan", "Islamabad, Pakistan", "Peshawar, Pakistan",
+  "Colombo, Sri Lanka", "Kandy, Sri Lanka", "Galle, Sri Lanka",
+  "Dhaka, Bangladesh", "Chittagong, Bangladesh",
+  "Kathmandu, Nepal", "Pokhara, Nepal",
+  "Thimphu, Bhutan", "Male, Maldives",
+
+  // 🇯🇵 Japan
+  "Tokyo, Japan", "Osaka, Japan", "Kyoto, Japan", "Hiroshima, Japan",
+  "Sapporo, Japan", "Fukuoka, Japan", "Nagoya, Japan", "Nara, Japan",
+  "Yokohama, Japan", "Okinawa, Japan",
+
+  // 🇨🇳 China
+  "Beijing, China", "Shanghai, China", "Guangzhou, China", "Shenzhen, China",
+  "Chengdu, China", "Xi'an, China", "Hangzhou, China", "Chongqing, China",
+  "Guilin, China", "Kunming, China", "Lhasa, Tibet",
+
+  // 🇰🇷 South Korea & Taiwan & Hong Kong
+  "Seoul, South Korea", "Busan, South Korea", "Jeju, South Korea",
+  "Taipei, Taiwan", "Kaohsiung, Taiwan",
+  "Hong Kong", "Macau",
+
+  // 🇸🇬 Southeast Asia
+  "Singapore", "Kuala Lumpur, Malaysia", "Penang, Malaysia", "Langkawi, Malaysia",
+  "Bangkok, Thailand", "Phuket, Thailand", "Chiang Mai, Thailand", "Pattaya, Thailand",
+  "Bali, Indonesia", "Jakarta, Indonesia", "Yogyakarta, Indonesia", "Lombok, Indonesia",
+  "Manila, Philippines", "Cebu, Philippines", "Boracay, Philippines", "Palawan, Philippines",
+  "Hanoi, Vietnam", "Ho Chi Minh City, Vietnam", "Da Nang, Vietnam", "Hoi An, Vietnam",
+  "Siem Reap, Cambodia", "Phnom Penh, Cambodia",
+  "Vientiane, Laos", "Luang Prabang, Laos",
+  "Yangon, Myanmar", "Naypyidaw, Myanmar",
+  "Brunei", "Dili, Timor-Leste",
+
+  // 🇦🇺 Australia & New Zealand
+  "Sydney, Australia", "Melbourne, Australia", "Brisbane, Australia", "Perth, Australia",
+  "Adelaide, Australia", "Gold Coast, Australia", "Cairns, Australia", "Darwin, Australia",
+  "Auckland, New Zealand", "Queenstown, New Zealand", "Wellington, New Zealand",
+  "Christchurch, New Zealand",
+
+  // 🌍 Africa
+  "Cairo, Egypt", "Luxor, Egypt", "Alexandria, Egypt", "Hurghada, Egypt", "Sharm el-Sheikh, Egypt",
+  "Casablanca, Morocco", "Marrakech, Morocco", "Fez, Morocco", "Rabat, Morocco", "Tangier, Morocco",
+  "Tunis, Tunisia", "Algiers, Algeria", "Tripoli, Libya",
+  "Nairobi, Kenya", "Mombasa, Kenya", "Zanzibar, Tanzania", "Dar es Salaam, Tanzania",
+  "Johannesburg, South Africa", "Cape Town, South Africa", "Durban, South Africa", "Pretoria, South Africa",
+  "Lagos, Nigeria", "Abuja, Nigeria", "Accra, Ghana", "Dakar, Senegal",
+  "Addis Ababa, Ethiopia", "Kigali, Rwanda", "Kampala, Uganda",
+  "Harare, Zimbabwe", "Lusaka, Zambia", "Maputo, Mozambique",
+  "Antananarivo, Madagascar", "Port Louis, Mauritius", "Victoria, Seychelles",
+
+  // 🌏 Central Asia
+  "Samarkand, Uzbekistan", "Bishkek, Kyrgyzstan", "Dushanbe, Tajikistan",
+  "Ashgabat, Turkmenistan", "Nur-Sultan, Kazakhstan",
+
+  // 🏝️ Caribbean & Pacific Islands
+  "Havana, Cuba", "Kingston, Jamaica", "Nassau, Bahamas", "Bridgetown, Barbados",
+  "Port of Spain, Trinidad & Tobago", "Santo Domingo, Dominican Republic",
+  "San Juan, Puerto Rico", "Papeete, French Polynesia", "Nadi, Fiji",
+  "Apia, Samoa", "Suva, Fiji", "Honiara, Solomon Islands",
+
+  // 🌐 Other Notable Destinations
+  "Valletta, Malta", "Nicosia, Cyprus", "Limassol, Cyprus", "Paphos, Cyprus",
+  "Luxembourg City, Luxembourg", "Monaco", "Andorra la Vella, Andorra",
+  "San Marino", "Vatican City", "Liechtenstein",
 ]
 
 export function HotelBooking() {
