@@ -207,70 +207,48 @@ export default function HealthInsurancePage() {
         )}
 
         {/* Step: Payment */}
-        {step === "payment" && (
-          <div className="max-w-xl mx-auto bg-white rounded-2xl shadow p-8">
-            <div className="flex gap-3 bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
-              <AlertCircle className="text-amber-500 shrink-0 mt-0.5" size={20} />
-              <p className="text-sm text-amber-800">
-                <strong>Delivery Notice:</strong> Your insurance document will be delivered <strong>within 1 hour</strong> after our team contacts you on WhatsApp and confirms your travel requirements.
-              </p>
-            </div>
-            <h2 className="text-xl font-bold text-gray-900 mb-2">Complete Payment</h2>
-            <div className="text-3xl font-bold text-blue-700">{plan?.price} <span className="text-lg text-gray-500">/ {plan?.inr}</span></div>
-            <div className="text-sm text-gray-500 mb-6">{plan?.name}</div>
+       const [orderId, setOrderId] = useState<string>("");
 
-            <div className="border rounded-xl p-5 text-center mb-5">
-              <p className="font-semibold text-gray-800 mb-3">Scan & Pay via UPI</p>
-              <img
-                src="/upi-qr.png"
-                alt="UPI QR Code"
-                className="w-48 h-48 mx-auto object-contain rounded-lg border"
-                onError={(e) => { (e.target as HTMLImageElement).src = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi://pay?pa=92sweetflower@okaxis"; }}
-              />
-              <p className="text-sm text-gray-500 mt-2">Google Pay / PhonePe / Paytm / Any UPI</p>
-            </div>
+useEffect(() => {
+  if (step === "payment" && !orderId) {
+    setOrderId(`ORD-${Math.floor(100000 + Math.random() * 900000)}`);
+  }
+}, [step, orderId]);
 
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">UPI Transaction ID / Ref No.</label>
-              <input
-                type="text"
-                name="upiRef"
-                value={form.upiRef}
-                onChange={handleChange}
-                placeholder="Enter 12-digit Ref No."
-                className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
+const whatsappLink = `https://wa.me/447877679344?text=${encodeURIComponent(
+  `Hello Mr. Book & Fly!\n\nI have submitted my Travel Health Insurance booking.\n\n` +
+  `Order ID: ${orderId}\n` +
+  `Plan: ${plan?.name}\n` +
+  `Name: ${form.fullName}\n` +
+  `Passport: ${form.passportNumber}\n` +
+  `Destination: ${form.destination}\n` +
+  `Travel Dates: ${form.departureDate} to ${form.returnDate}\n\n` +
+  `Please process my order and send payment instructions.`
+)}`;
 
-            <a
-              href={`https://wa.me/447877679344?text=${whatsappMsg}`}
-              target="_blank"
-              rel="noreferrer"
-              className="block w-full bg-green-600 hover:bg-green-700 text-white text-center font-semibold py-3.5 rounded-xl transition"
-            >
-              Confirm Payment & Continue on WhatsApp
-            </a>
-            <button onClick={() => setStep("details")} className="mt-3 w-full text-center text-gray-500 text-sm hover:text-gray-700">← Go Back & Edit</button>
-          </div>
-        )}
-
-        {/* FAQs */}
-        <div className="max-w-2xl mx-auto mt-14">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Frequently Asked Questions</h2>
-          <div className="space-y-3">
-            {FAQS.map((faq, i) => (
-              <div key={i} className="bg-white rounded-xl border p-4 cursor-pointer" onClick={() => setOpenFaq(openFaq === i ? null : i)}>
-                <div className="flex justify-between items-center font-medium text-gray-800">
-                  {faq.q}
-                  {openFaq === i ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-                </div>
-                {openFaq === i && <p className="mt-2 text-sm text-gray-600">{faq.a}</p>}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+const handleDownloadInvoice = () => {
+  const invoiceHTML = `
+    <style>
+      @page { margin: 20mm; }
+      body { font-family: Arial, sans-serif; }
+      .invoice { max-width: 800px; margin: 0 auto; padding: 20px; }
+    </style>
+    <div class="invoice">
+      <h1 style="text-align:center">Unpaid Invoice</h1>
+      <p><strong>Order ID:</strong> ${orderId}</p>
+      <h2>${plan?.name} – ${plan?.price}</h2>
+      <p><strong>Name:</strong> ${form.fullName}</p>
+      <p><strong>Passport:</strong> ${form.passportNumber}</p>
+      <p><strong>Destination:</strong> ${form.destination}</p>
+      <p><strong>Dates:</strong> ${form.departureDate} – ${form.returnDate}</p>
+      <hr>
+      <p style="text-align:center; color:#666">Thank you for your booking.<br>Our team will contact you shortly.</p>
     </div>
-  );
-}
+  `;
 
+  const printWin = window.open("", "_blank");
+  printWin?.document.write(invoiceHTML);
+  printWin?.document.close();
+  printWin?.focus();
+  setTimeout(() => printWin?.print(), 500);
+};
