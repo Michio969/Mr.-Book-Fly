@@ -2,9 +2,11 @@ import React, { useState, useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Building, Calendar as CalendarIcon, Users, CheckCircle2, ShieldCheck, MapPin, MessageCircle } from "lucide-react"
 import { toast } from "sonner"
+
+const WHATSAPP_NUMBER = "447877679344"
 
 const generateOrderId = () => {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
@@ -12,6 +14,7 @@ const generateOrderId = () => {
   for (let i = 0; i < 8; i++) id += chars[Math.floor(Math.random() * chars.length)]
   return id
 }
+
 const WORLD_CITIES = [
   "Paris, France", "London, United Kingdom", "New York, USA", "Dubai, UAE",
   "Tokyo, Japan", "Singapore", "Sydney, Australia", "Rome, Italy",
@@ -49,8 +52,6 @@ export function HotelBooking() {
     const diff = new Date(formData.checkout).getTime() - new Date(formData.checkin).getTime()
     return Math.max(0, Math.floor(diff / (1000 * 60 * 60 * 24)))
   }, [formData.checkin, formData.checkout])
-
-  
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target
@@ -138,6 +139,7 @@ export function HotelBooking() {
                       )}
                     </div>
 
+                    {/* Check-in / Check-out */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="checkin">Check-in Date</Label>
@@ -161,6 +163,7 @@ export function HotelBooking() {
                       </div>
                     )}
 
+                    {/* Guest Details */}
                     <div className="space-y-4 pt-4 border-t border-slate-100">
                       <h3 className="font-semibold text-slate-900 flex items-center">
                         <Users className="w-5 h-5 mr-2 text-blue-600" /> Guest Details
@@ -198,7 +201,12 @@ export function HotelBooking() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                           <Label htmlFor="gender">Gender</Label>
-                          <select id="gender" value={formData.gender} onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData(p => ({ ...p, gender: e.target.value }))} className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                          <select
+                            id="gender"
+                            value={formData.gender}
+                            onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData(p => ({ ...p, gender: e.target.value }))}
+                            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                          >
                             <option value="">Select gender</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
@@ -264,6 +272,7 @@ export function HotelBooking() {
             </Card>
           </div>
 
+          {/* Sidebar */}
           <div className="space-y-6">
             <Card className="border-blue-100 shadow-md bg-white">
               <CardHeader className="bg-blue-50/50 border-b border-blue-100 pb-4">
@@ -302,4 +311,3 @@ export function HotelBooking() {
     </div>
   )
 }
-
