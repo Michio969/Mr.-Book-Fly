@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from "react-router-dom"
-import { Plane, Menu, X, MessageCircle } from "lucide-react"
+import { Menu, X, MessageCircle } from "lucide-react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Toaster } from "sonner"
@@ -44,9 +44,9 @@ export function Layout() {
       {/* Navbar */}
       <header className="bg-white border-b sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center space-x-2 text-blue-700">
-            <Plane className="h-6 w-6" />
-            <span className="text-xl font-bold tracking-tight">Mr Book & Fly</span>
+          {/* NEW LOGO */}
+          <Link to="/" className="flex items-center">
+            <img src="/logo.svg" alt="Mr Book & Fly" className="h-12 w-auto" />
           </Link>
 
           {/* Desktop Nav */}
@@ -102,9 +102,9 @@ export function Layout() {
       <footer className="bg-slate-900 text-slate-300 py-12 border-t border-slate-800">
         <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <Link to="/" className="flex items-center space-x-2 text-white mb-4">
-              <Plane className="h-6 w-6" />
-              <span className="text-xl font-bold">Mr Book & Fly</span>
+            {/* NEW LOGO IN FOOTER */}
+            <Link to="/" className="flex items-center mb-4">
+              <img src="/logo.svg" alt="Mr Book & Fly" className="h-10 w-auto" />
             </Link>
             <p className="text-sm text-slate-400 mb-4">Providing verified, embassy-acceptable dummy bookings for visas. Fast, secure, and reliable.</p>
             <p className="text-xs text-slate-500">Disclaimer: Bookings are for visa purposes only.</p>
