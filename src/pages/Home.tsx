@@ -1,17 +1,3 @@
-// ─── HOME.TSX — UPDATED ───────────────────────────────────────
-// Changes made:
-//   1. Line 635: "Mr. Book & Mrs. Fly Advantage" → "Mr. Book & Fly Advantage"
-//   2. Line 675: Legal disclaimer brand name fixed
-//   3. TrustBar, HowItWorks, Guarantee, Reviews components are
-//      already built into this file — your empty .tsx files
-//      should just re-export from here OR be deleted (see note below)
-// ─────────────────────────────────────────────────────────────
-// NOTE: Your 4 empty .tsx files (TrustBar, HowItWorks, Guarantee, Reviews)
-// are NOT needed — this file already has all that content built in.
-// Either DELETE those empty files, or paste the component code below
-// into them if you want to use them separately.
-// ─────────────────────────────────────────────────────────────
-
 import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "motion/react"
@@ -158,11 +144,11 @@ const T: Record<string, Record<string, string>> = {
     te: "ప్రపంచవ్యాప్తంగా 10,000+ వీసా దరఖాస్తుదారులు విశ్వసిస్తున్నారు. వేగంగా, సురక్షితంగా బుకింగ్.",
     ta: "உலகெங்கிலும் 10,000+ விசா விண்ணப்பதாரர்களால் நம்பப்படுகிறது. வேகமான, பாதுகாப்பான முன்பதிவுகள்.",
     mr: "जगभरात 10,000+ व्हिसा अर्जदारांनी विश्वास ठेवलेला. जलद, सुरक्षित डमी तिकीट आणि हॉटेल बुकिंग.",
-    gu: "વિશ્વભरमां 10,000+ વિઝા અરજદારો દ્વારા વિશ્વાસ. ઝડپी, સুरक्षিત ડмी ટिकिट અने હоटेл બुकिंग.",
+    gu: "વિશ્વભરમાં 10,000+ વિઝા અરજદારો દ્વારા વિશ્વાસ. ઝડપી, સુરક્ષિત ડમી ટિકિટ અને હોટેલ બુકિંગ.",
     kn: "ಜಗತ್ತಿನಾದ್ಯಂತ 10,000+ ವೀಸಾ ಅರ್ಜಿದಾರರ ನಂಬಿಕೆ. ವೇಗವಾದ, ಸುರಕ್ಷಿತ ಬುಕಿಂಗ್.",
-    ml: "ലോകमेम്पाടും 10,000+ വിസ അപേക്ഷകർ വിശ്വസിക്കുന്നു. വേഗत്തിലും സുरക്ഷিതമायും ബുക്കിംഗ്.",
+    ml: "ലോകമെമ്പാടും 10,000+ വിസ അപേക്ഷകർ വിശ്വസിക്കുന്നു. വേഗത്തിലും സുരക്ഷിതമായും ബുക്കിംഗ്.",
     pa: "ਦੁਨੀਆਭਰ ਵਿੱਚ 10,000+ ਵੀਜ਼ਾ ਅਰਜ਼ੀਕਾਰਾਂ ਦਾ ਭਰੋਸਾ। ਤੇਜ਼, ਸੁਰੱਖਿਅਤ ਡਮੀ ਟਿਕਟ ਅਤੇ ਹੋਟਲ ਬੁਕਿੰਗ।",
-    or: "ବিଶ୍ୱ ଜୁଡ଼ା 10,000+ ଭିସା ଆବেদନকارীঙ୍କ ভরসা। ଦ୍ରুত, ସୁরক্ষিত ବুকিং।",
+    or: "ବିଶ୍ୱ ଜୁଡ଼ା 10,000+ ଭିସା ଆବେଦନକାରୀଙ୍କ ଭରସା। ଦ୍ରୁତ, ସୁରକ୍ଷିତ ବୁକିଂ।",
   },
   book_now: {
     en: "Book Now", fr: "Réserver maintenant", de: "Jetzt buchen", es: "Reservar ahora",
@@ -170,8 +156,8 @@ const T: Record<string, Record<string, string>> = {
     zh: "立即预订", ja: "今すぐ予約", ko: "지금 예약", id: "Pesan Sekarang", ms: "Tempah Sekarang",
     ar: "احجز الآن", ur: "ابھی بک کریں", fa: "همین الان رزرو کنید",
     hi: "अभी बुक करें", bn: "এখনই বুক করুন", te: "ఇప్పుడే బుక్ చేయండి", ta: "இப்போதே பதிவு செய்யுங்கள்",
-    mr: "आता बुक करा", gu: "હવे બुक करो", kn: "ಈಗಲೇ ಬుಕ್ ಮಾಡಿ", ml: "ഇپ്പോൾ ബुക്ക് ചെय്യൂ",
-    pa: "ਹੁਣੇ ਬੁੱਕ ਕਰੋ", or: "ଏবে ବুক କरन୍ତୁ",
+    mr: "आता बुक करा", gu: "હવે બુક કરો", kn: "ಈಗಲೇ ಬುಕ್ ಮಾಡಿ", ml: "ഇപ്പോൾ ബുക്ക് ചെയ്യൂ",
+    pa: "ਹੁਣੇ ਬੁੱਕ ਕਰੋ", or: "ଏବେ ବୁକ୍ କରନ୍ତୁ",
   },
   delivery_note: {
     en: "Get your booking within 30 minutes",
@@ -190,9 +176,9 @@ const T: Record<string, Record<string, string>> = {
     fa: "در 30 دقیقه رزرو خود را دریافت کنید",
     hi: "30 मिनट में बुकिंग पाएं", bn: "৩০ মিনিটের মধ্যে বুকিং পান",
     te: "30 నిమిషాల్లో బుకింగ్ పొందండి", ta: "30 நிமிடங்களில் முன்பதிவு பெறுங்கள்",
-    mr: "30 मिनिटांत बुकिंग मिळवा", gu: "30 મिनिटমاं বুকিং मेळवো",
-    kn: "30 ನಿಮಿಷದಲ್ಲಿ ಬುಕಿಂಗ್ ಪಡೆಯಿರಿ", ml: "30 മিനिറ്റিനுള്ళिൽ ബুക്കിংഗ് నేടൂ",
-    pa: "30 ਮਿੰਟਾਂ ਵਿੱਚ ਬੁਕਿੰਗ ਪਾਓ", or: "30 ମिনিট মধ্যরে বুকিং পাআন্তু",
+    mr: "30 मिनिटांत बुकिंग मिळवा", gu: "30 મિનિટમાં બુકિંગ મેળવો",
+    kn: "30 ನಿಮಿಷದಲ್ಲಿ ಬುಕಿಂಗ್ ಪಡೆಯಿರಿ", ml: "30 മിനിറ്റിനുള്ളിൽ ബുക്കിംഗ് നേടൂ",
+    pa: "30 ਮਿੰਟਾਂ ਵਿੱਚ ਬੁਕਿੰਗ ਪਾਓ", or: "30 ମିନିଟ୍‌ ମଧ୍ୟରେ ବୁକିଂ ପାଆନ୍ତୁ",
   },
   services_h: {
     en: "Our Visa Support Services", fr: "Nos services de soutien visa", de: "Unsere Visa-Unterstützungsdienste",
@@ -204,9 +190,9 @@ const T: Record<string, Record<string, string>> = {
     fa: "خدمات پشتیبانی ویزای ما",
     hi: "हमारी वीज़ा सहायता सेवाएं", bn: "আমাদের ভিসা সহায়তা সেবা",
     te: "మా వీసా సహాయ సేవలు", ta: "எங்கள் விசா ஆதரவு சேவைகள்",
-    mr: "आमच्या व्हिसा समर्थन सेवा", gu: "અমারी વિઝা સپोর্ট সেবাओ",
-    kn: "ನಮ್ಮ ವೀಸಾ ಬೆಂಬಲ ಸೇವೆಗಳು", ml: "ഞങ്ങளുടে വিস സپ্পোর്ট് সেবগ৾",
-    pa: "ਸਾਡੀਆਂ ਵੀਜ਼ਾ ਸਹਾਇਤਾ ਸੇਵਾਵਾਂ", or: "ആমர ভিসা সহায়তা সেবা",
+    mr: "आमच्या व्हिसा समर्थन सेवा", gu: "અમારી વિઝા સપોર્ટ સેવાઓ",
+    kn: "ನಮ್ಮ ವೀಸಾ ಬೆಂಬಲ ಸೇವೆಗಳು", ml: "ഞങ്ങളുടെ വിസ സപ്പോർട്ട് സേവനങ്ങൾ",
+    pa: "ਸਾਡੀਆਂ ਵੀਜ਼ਾ ਸਹਾਇਤਾ ਸੇਵਾਵਾਂ", or: "ଆମର ଭିସା ସହାୟତା ସେବା",
   },
   how_works_h: {
     en: "How It Works", fr: "Comment ça fonctionne", de: "Wie es funktioniert",
@@ -216,9 +202,9 @@ const T: Record<string, Record<string, string>> = {
     ar: "كيف يعمل", ur: "یہ کیسے کام کرتا ہے", fa: "چطور کار می‌کند",
     hi: "यह कैसे काम करता है", bn: "এটি কীভাবে কাজ করে",
     te: "ఇది ఎలా పని చేస్తుంది", ta: "இது எவ்வாறு செயல்படுகிறது",
-    mr: "हे कसे कार्य करते", gu: "আ কেবী రীতে কাম করে",
-    kn: "ಇದು ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ", ml: "ഇത് എങ്ങনে প্রবর্তিক্কুন্নু",
-    pa: "ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ", or: "এহা কিপরি কাম করে",
+    mr: "हे कसे कार्य करते", gu: "આ કેવી રીતે કામ કરે છે",
+    kn: "ಇದು ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ", ml: "ഇത് എങ്ങനെ പ്രവർത്തിക്കുന്നു",
+    pa: "ਇਹ ਕਿਵੇਂ ਕੰਮ ਕਰਦਾ ਹੈ", or: "ଏହା କିପରି କାମ କରେ",
   },
   reviews_h: {
     en: "What Our Clients Say", fr: "Ce que disent nos clients", de: "Was unsere Kunden sagen",
@@ -230,9 +216,9 @@ const T: Record<string, Record<string, string>> = {
     fa: "مشتریان ما چه می‌گویند",
     hi: "हमारे ग्राहक क्या कहते हैं", bn: "আমাদের ক্লায়েন্টরা কী বলেন",
     te: "మా క్లయింట్లు ఏమి చెప్తున్నారు", ta: "எங்கள் வாடிக்கையாளர்கள் என்ன சொல்கிறார்கள்",
-    mr: "आमचे ग्राहक काय म्हणतात", gu: "અমারে ক্লায়েন্ট শুধু কহে",
-    kn: "ನಮ್ಮ ಗ್ರಾಹಕರು ಏನು ಹೇಳುತ್ತಾರೆ", ml: "ഞগ്ഗÙളുടെ ক্লায়েন্টুকূ এন്ত് পরয়ুন്നু",
-    pa: "ਸਾਡੇ ਗਾਹਕ ਕੀ ਕਹਿੰਦੇ ਹਨ", or: "আম গ্রাহক ক'ণ কুহন্তি",
+    mr: "आमचे ग्राहक काय म्हणतात", gu: "અમારા ક્લાયન્ટ શું કહે છે",
+    kn: "ನಮ್ಮ ಗ್ರಾಹಕರು ಏನು ಹೇಳುತ್ತಾರೆ", ml: "ഞങ്ങളുടെ ക്ലയന്റുകൾ എന്ത് പറയുന്നു",
+    pa: "ਸਾਡੇ ਗਾਹਕ ਕੀ ਕਹਿੰਦੇ ਹਨ", or: "ଆମ ଗ୍ରାହକ କ'ଣ କୁହନ୍ତି",
   },
   faq_h: {
     en: "Frequently Asked Questions", fr: "Questions fréquemment posées", de: "Häufig gestellte Fragen",
@@ -242,9 +228,9 @@ const T: Record<string, Record<string, string>> = {
     ar: "الأسئلة الشائعة", ur: "اکثر پوچھے گئے سوالات", fa: "سوالات متداول",
     hi: "अक्सर पूछे जाने वाले प्रश्न", bn: "সাধারণত জিজ্ঞাসিত প্রশ্ন",
     te: "తరచుగా అడిగే ప్రశ్నలు", ta: "அடிக்கடி கேட்கப்படும் கேள்விகள்",
-    mr: "वारंवार विचारले जाणारे प्रश्न", gu: "বারংবার পূছাতা প্রশ্নো",
-    kn: "ಪದೇ ಪದೇ ಕೇಳಲಾಗುವ ಪ್ರಶ್ನೆಗಳು", ml: "പতিব ചোദ്യഗ്ঙ്ল്",
-    pa: "ਅਕਸਰ ਪੁੱਛੇ ਜਾਣ ਵਾਲੇ ਸਵਾਲ", or: "বারম্বার পচরাযাউথিবা প্রশ্ন",
+    mr: "वारंवार विचारले जाणारे प्रश्न", gu: "વારંવાર પૂછાતા પ્રશ્નો",
+    kn: "ಪದೇ ಪದೇ ಕೇಳಲಾಗುವ ಪ್ರಶ್ನೆಗಳು", ml: "പതിവ് ചോദ്യങ്ങൾ",
+    pa: "ਅਕਸਰ ਪੁੱਛੇ ਜਾਣ ਵਾਲੇ ਸਵਾਲ", or: "ବାରମ୍ବାର ପଚରାଯାଉଥିବା ପ୍ରଶ୍ନ",
   },
   cta_h: {
     en: "Need Your Documents Urgently?", fr: "Besoin de vos documents d'urgence?", de: "Dokumente dringend benötigt?",
@@ -257,9 +243,9 @@ const T: Record<string, Record<string, string>> = {
     fa: "آیا فوری به مدارک نیاز دارید؟",
     hi: "क्या आपको दस्तावेज़ तुरंत चाहिए?", bn: "আপনার নথি দ্রুত দরকার?",
     te: "మీ పత్రాలు అత్యవసరంగా కావాలా?", ta: "உங்கள் ஆவணங்கள் அவசரமாக வேண்டுமா?",
-    mr: "तुम्हाला कागदपत्रे तातडीने हवी आहेत का?", gu: "শুধু তামানে তাতকালिক দস্তাবেজো জোئে?",
-    kn: "ನಿಮ್ಮ ದಾಖಲೆಗಳು ತುರ್ತಾಗಿ ಬೇಕೇ?", ml: "নিঙ্ঙলুডে রেখকল্ অडিয়ন্তরমায়ি বেণো?",
-    pa: "ਕੀ ਤੁਹਾਨੂੰ ਤੁਰੰਤ ਦਸਤਾਵੇਜ਼ ਚਾਹੀਦੇ ਹਨ?", or: "আপণঙ্ক দলিল জরুরী দরকার?",
+    mr: "तुम्हाला कागदपत्रे तातडीने हवी आहेत का?", gu: "શું તમને તમારા દસ્તાવેજો તાત્કાલિક જોઈએ છે?",
+    kn: "ನಿಮ್ಮ ದಾಖಲೆಗಳು ತುರ್ತಾಗಿ ಬೇಕೇ?", ml: "നിങ്ങളുടെ രേഖകൾ അടിയന്തരമായി വേണോ?",
+    pa: "ਕੀ ਤੁਹਾਨੂੰ ਤੁਰੰਤ ਦਸਤਾਵੇਜ਼ ਚਾਹੀਦੇ ਹਨ?", or: "ଆପଣଙ୍କ ଦଲିଲ ଜରୁରୀ ଦରକାର?",
   },
   whatsapp: {
     en: "Chat on WhatsApp", fr: "Chatter sur WhatsApp", de: "Auf WhatsApp chatten",
@@ -270,9 +256,9 @@ const T: Record<string, Record<string, string>> = {
     fa: "چت در واتساپ",
     hi: "WhatsApp पर चैट करें", bn: "WhatsApp-এ চ্যাট করুন",
     te: "WhatsApp లో చాట్ చేయండి", ta: "WhatsApp-ல் அரட்டை",
-    mr: "WhatsApp वर चॅट करा", gu: "WhatsApp পর চেট করো",
-    kn: "WhatsApp ನಲ್ಲಿ ಚಾಟ್ ಮಾಡಿ", ml: "WhatsApp-ൽ ചाट്ट് ചেয়്যൂ",
-    pa: "WhatsApp ਤੇ ਚੈਟ ਕਰੋ", or: "WhatsApp রে চ্যাট করন্তু",
+    mr: "WhatsApp वर चॅट करा", gu: "WhatsApp પર ચેટ કરો",
+    kn: "WhatsApp ನಲ್ಲಿ ಚಾಟ್ ಮಾಡಿ", ml: "WhatsApp-ൽ ചാറ്റ് ചെയ്യൂ",
+    pa: "WhatsApp ਤੇ ਚੈਟ ਕਰੋ", or: "WhatsApp ରେ ଚ୍ୟାଟ୍ କରନ୍ତୁ",
   },
   start_booking: {
     en: "Start Booking Now", fr: "Commencer la réservation", de: "Jetzt mit Buchung beginnen",
@@ -284,9 +270,9 @@ const T: Record<string, Record<string, string>> = {
     fa: "همین الان شروع به رزرو کنید",
     hi: "अभी बुकिंग शुरू करें", bn: "এখনই বুকিং শুরু করুন",
     te: "ఇప్పుడే బుకింగ్ ప్రారంభించండి", ta: "இப்போதே முன்பதிவு தொடங்குங்கள்",
-    mr: "आत्ता बुकिंग सुरू करा", gu: "হমণাং বুকিং শুরু করো",
-    kn: "ಈಗಲೇ ಬುಕಿಂಗ್ ಪ್ರಾರಂಭಿಸಿ", ml: "ഇप്पോল്‍ ബुക്കിংഗ് ആরम്ഭിക്കൂ",
-    pa: "ਹੁਣੇ ਬੁਕਿੰਗ ਸ਼ੁਰੂ ਕਰੋ", or: "এবে বুকিং আরম্ভ করন্তু",
+    mr: "आत्ता बुकिंग सुरू करा", gu: "હમણાં બુકિંગ શરૂ કરો",
+    kn: "ಈಗಲೇ ಬುಕಿಂಗ್ ಪ್ರಾರಂಭಿಸಿ", ml: "ഇപ്പോൾ ബുക്കിംഗ് ആരംഭിക്കൂ",
+    pa: "ਹੁਣੇ ਬੁਕਿੰਗ ਸ਼ੁਰੂ ਕਰੋ", or: "ଏବେ ବୁକିଂ ଆରମ୍ଭ କରନ୍ତୁ",
   },
 }
 
@@ -294,6 +280,7 @@ function t(key: string, lang: string): string {
   return T[key]?.[lang] || T[key]?.["en"] || key
 }
 
+// ─── COUNTER ────────────────────────────────────────────────
 function Counter({ end, suffix = "" }: { end: number; suffix?: string }) {
   const [count, setCount] = useState(0)
   useEffect(() => {
@@ -309,6 +296,7 @@ function Counter({ end, suffix = "" }: { end: number; suffix?: string }) {
   return <span>{count.toLocaleString()}{suffix}</span>
 }
 
+// ─── FAQ ITEM ────────────────────────────────────────────────
 function FaqItem({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false)
   return (
@@ -328,6 +316,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
   )
 }
 
+// ─── MAIN HOME ────────────────────────────────────────────────
 export function Home() {
   const [lang, setLang] = useState("en")
   const [showLangMenu, setShowLangMenu] = useState(false)
@@ -382,21 +371,26 @@ export function Home() {
       {/* ── HERO ── */}
       <section className="relative bg-gradient-to-br from-blue-950 via-blue-900 to-slate-900 text-white py-24 lg:py-36 overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop')] bg-cover bg-center" />
+        {/* Decorative circles */}
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl" />
         <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl" />
+
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
               <Badge className="mb-6 py-1.5 px-4 text-sm bg-amber-500/20 text-amber-400 border-amber-500/40 backdrop-blur-sm">
                 <ShieldCheck className="w-4 h-4 mr-2" /> {t("hero_badge", lang)}
               </Badge>
+
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
                 {t("hero_h1a", lang)}{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400">{t("hero_h1b", lang)}</span>
               </h1>
+
               <p className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto leading-relaxed">
                 {t("hero_sub", lang)}
               </p>
+
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
                 <Link to="/order-form">
                   <Button size="lg" className="bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold text-lg h-14 px-10 rounded-xl shadow-lg shadow-amber-500/30">
@@ -404,14 +398,31 @@ export function Home() {
                   </Button>
                 </Link>
                 <a href="https://wa.me/447877679344" target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 h-14 px-8 rounded-xl font-semibold backdrop-blur-sm">
-                    💬 {t("whatsapp", lang)}
+                  <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 h-14 px-8 rounded-xl backdrop-blur-sm">
+                    <MessageCircle className="w-5 h-5 mr-2 text-green-400" /> {t("whatsapp", lang)}
                   </Button>
                 </a>
               </div>
-              <p className="text-slate-400 text-sm flex items-center justify-center gap-2">
-                <Lock className="w-4 h-4" /> {t("delivery_note", lang)}
-              </p>
+
+              <div className="flex items-center justify-center gap-2 text-slate-400 text-sm mb-12">
+                <Clock className="w-4 h-4 text-amber-400" /> {t("delivery_note", lang)}
+              </div>
+
+              {/* Trust bar */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 border-t border-white/10">
+                {[
+                  { icon: <Star className="w-5 h-5 fill-amber-400 text-amber-400" />, val: "4.9/5", label: "Customer Rating" },
+                  { icon: <Users className="w-5 h-5 text-blue-400" />, val: "10,000+", label: "Happy Clients" },
+                  { icon: <ShieldCheck className="w-5 h-5 text-green-400" />, val: "100%", label: "Embassy Approved" },
+                  { icon: <Zap className="w-5 h-5 text-purple-400" />, val: "30 Min", label: "Avg Delivery" },
+                ].map((s, i) => (
+                  <div key={i} className="flex flex-col items-center gap-1">
+                    {s.icon}
+                    <span className="text-white font-bold text-lg">{s.val}</span>
+                    <span className="text-slate-400 text-xs">{s.label}</span>
+                  </div>
+                ))}
+              </div>
             </motion.div>
           </div>
         </div>
@@ -420,7 +431,7 @@ export function Home() {
       {/* ── TRUST BAR ── */}
       <section className="bg-white border-b border-slate-100 py-4">
         <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-600">
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm text-slate-600">
             {[
               { icon: "🔒", text: "SSL Secured Checkout" },
               { icon: "✅", text: "100% Embassy Accepted" },
@@ -438,19 +449,210 @@ export function Home() {
         </div>
       </section>
 
-      {/* ── REST OF YOUR EXISTING SECTIONS (stats, services, how it works, etc.) ──
-          Keep everything else from your original file exactly as-is from here.
-          The only TWO lines changed below are:
-          1. "Mr. Book & Mrs. Fly Advantage" → "Mr. Book & Fly Advantage"
-          2. Legal disclaimer brand name
-      ── */}
+      {/* ── STATS STRIP ── */}
+      <section className="bg-blue-600 py-10 text-white">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            {[
+              { val: 10000, suffix: "+", label: "Bookings Completed" },
+              { val: 98, suffix: "%", label: "Visa Success Rate" },
+              { val: 50, suffix: "+", label: "Countries Covered" },
+              { val: 24, suffix: "/7", label: "Customer Support" },
+            ].map((s, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                <div className="text-4xl font-extrabold mb-1"><Counter end={s.val} suffix={s.suffix} /></div>
+                <div className="text-blue-100 text-sm">{s.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SERVICES ── */}
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-14">
+            <Badge className="mb-4 bg-blue-50 text-blue-700 border-blue-200">Our Services</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{t("services_h", lang)}</h2>
+            <p className="text-slate-600 max-w-2xl mx-auto">Everything you need for your visa application — formatted to embassy standards and delivered fast.</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {[
+              { title: "Flight Reservations", desc: "Verifiable PNR-verified flight itineraries. Ready for Schengen, UK, US & more.", icon: <Plane className="w-7 h-7 text-blue-600" />, link: "/flight-reservation", price: "From $3 / ₹299", color: "blue" },
+              { title: "Hotel Bookings", desc: "Confirmed hotel reservations in any destination worldwide. Embassy-safe.", icon: <Building className="w-7 h-7 text-green-600" />, link: "/hotel-booking", price: "From $6 / ₹499", color: "green" },
+              { title: "Event Booking", desc: "Verifiable event tickets to prove purpose of visit to embassy.", icon: <Ticket className="w-7 h-7 text-purple-600" />, link: "/event-booking", price: "From $12 / ₹1199", color: "purple" },
+              { title: "Health Insurance", desc: "Travel health insurance per day — add-on with any flight booking.", icon: <Heart className="w-7 h-7 text-red-500" />, link: "/flight-reservation", price: "$4 / ₹499 per day", color: "red" },
+              { title: "Invitation Letters", desc: "Professionally drafted letters for tourist, business and family visas.", icon: <Mail className="w-7 h-7 text-amber-600" />, link: "/invitation-letter", price: "Contact WhatsApp", color: "amber" },
+              { title: "Slot Booking", desc: "Embassy & VFS appointment slots for all major countries worldwide.", icon: <CalendarDays className="w-7 h-7 text-indigo-600" />, link: "/appointment-booking", price: "Contact WhatsApp", color: "indigo" },
+              { title: "Valuable Deals", desc: "Complete visa file packages — flight, hotel, insurance, cover letter included.", icon: <BadgeCheck className="w-7 h-7 text-orange-600" />, link: "/valuable-deals", price: "From ₹24,999", color: "orange" },
+              { title: "Flight + Hotel Bundle", desc: "Best value combo — flight itinerary + hotel reservation in one order.", icon: <Calendar className="w-7 h-7 text-teal-600" />, link: "/order-form", price: "From $5 / ₹449", color: "teal" },
+            ].map((s, i) => {
+              const colorMap: Record<string, string> = {
+                blue: "bg-blue-50 group-hover:bg-blue-100",
+                green: "bg-green-50 group-hover:bg-green-100",
+                purple: "bg-purple-50 group-hover:bg-purple-100",
+                red: "bg-red-50 group-hover:bg-red-100",
+                amber: "bg-amber-50 group-hover:bg-amber-100",
+                indigo: "bg-indigo-50 group-hover:bg-indigo-100",
+                orange: "bg-orange-50 group-hover:bg-orange-100",
+                teal: "bg-teal-50 group-hover:bg-teal-100",
+              }
+              return (
+                <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07 }}>
+                  <Link to={s.link} className="group block h-full">
+                    <Card className="h-full border-slate-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300 cursor-pointer">
+                      <CardHeader className="pb-3">
+                        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 transition-colors ${colorMap[s.color]}`}>
+                          {s.icon}
+                        </div>
+                        <CardTitle className="text-base">{s.title}</CardTitle>
+                        <CardDescription className="text-sm">{s.desc}</CardDescription>
+                      </CardHeader>
+                      <CardFooter className="pt-3 border-t border-slate-100 flex justify-between items-center">
+                        <span className="text-sm font-semibold text-slate-800">{s.price}</span>
+                        <ArrowRight className="w-4 h-4 text-blue-500 group-hover:translate-x-1 transition-transform" />
+                      </CardFooter>
+                    </Card>
+                  </Link>
+                </motion.div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── HOW IT WORKS ── */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-14">
+            <Badge className="mb-4 bg-green-50 text-green-700 border-green-200">Simple Process</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{t("how_works_h", lang)}</h2>
+            <p className="text-slate-600">Get your visa-ready documents in 3 simple steps.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto relative">
+            <div className="hidden md:block absolute top-14 left-[20%] right-[20%] h-0.5 bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200" />
+            {[
+              { step: "01", title: "Choose Service", desc: "Pick flight, hotel, insurance or any visa document you need.", icon: <FileText className="w-8 h-8 text-blue-600" />, color: "bg-blue-50 border-blue-200" },
+              { step: "02", title: "Secure Payment", desc: "Pay via UPI, PayPal or WhatsApp. Fast and fully secure.", icon: <Lock className="w-8 h-8 text-green-600" />, color: "bg-green-50 border-green-200" },
+              { step: "03", title: "Receive on WhatsApp", desc: "Get your verified documents delivered to your email & WhatsApp within minutes.", icon: <MessageCircle className="w-8 h-8 text-amber-600" />, color: "bg-amber-50 border-amber-200" },
+            ].map((s, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }} className="relative flex flex-col items-center text-center z-10">
+                <div className={`w-28 h-28 rounded-full ${s.color} border-2 flex items-center justify-center mb-4 shadow-sm`}>
+                  {s.icon}
+                </div>
+                <div className="absolute top-0 -left-2 w-8 h-8 bg-blue-600 text-white rounded-full text-xs font-bold flex items-center justify-center shadow-md">{s.step}</div>
+                <h3 className="text-xl font-bold mb-2">{s.title}</h3>
+                <p className="text-slate-500 text-sm leading-relaxed">{s.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── URGENCY CTA ── */}
+      <section className="py-16 bg-gradient-to-r from-blue-700 to-blue-600 text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074')] bg-cover bg-center" />
+        <div className="container mx-auto px-4 text-center relative z-10">
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("cta_h", lang)}</h2>
+            <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">Our team processes your booking within 30 minutes to 2 hours. Don't risk your visa with unverified documents.</p>
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+              <Link to="/order-form">
+                <Button size="lg" className="bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold text-lg h-14 px-10 rounded-xl shadow-lg">
+                  {t("start_booking", lang)} <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+              <a href="https://wa.me/447877679344" target="_blank" rel="noopener noreferrer">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-700 h-14 px-8 rounded-xl font-bold">
+                  <MessageCircle className="w-5 h-5 mr-2" /> {t("whatsapp", lang)}
+                </Button>
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── ADDITIONAL SERVICES ── */}
+      <section className="py-20 bg-gradient-to-br from-slate-900 to-blue-950 text-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">More Visa Support Services</h2>
+            <p className="text-slate-300 max-w-2xl mx-auto">Beyond bookings — comprehensive documentation to make your visa application bulletproof.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 max-w-6xl mx-auto mb-10">
+            {[
+              { emoji: "📝", title: "Cover Letter", desc: "Embassy-ready cover letters tailored to your visa type and destination.", wa: "I need a Cover Letter for my visa application." },
+              { emoji: "🗺️", title: "Travel Itinerary", desc: "Detailed day-by-day travel plans showing your activities and accommodation.", wa: "I need a Travel Itinerary for my visa application." },
+              { emoji: "📂", title: "Document Preparation", desc: "Complete visa checklist, file organisation and review service.", wa: "I need help with Document Preparation for my visa." },
+              { emoji: "🌍", title: "Other Visa Services", desc: "Invitation letters, sponsorship letters, NOC letters, bank statement guidance.", wa: "I need other visa support services. Please guide me." },
+            ].map((s, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                className="bg-white/8 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/12 transition-all border border-white/10 hover:border-white/20">
+                <div className="text-4xl mb-4">{s.emoji}</div>
+                <h3 className="text-lg font-bold mb-2">{s.title}</h3>
+                <p className="text-slate-300 text-sm mb-5 leading-relaxed">{s.desc}</p>
+                <a href={`https://wa.me/447877679344?text=${encodeURIComponent("Hi! " + s.wa)}`} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center text-sm font-semibold text-amber-400 hover:text-amber-300 transition-colors gap-1">
+                  💬 Enquire on WhatsApp <ArrowRight className="w-3 h-3" />
+                </a>
+              </motion.div>
+            ))}
+          </div>
+          <div className="text-center flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="https://wa.me/447877679344" target="_blank" rel="noopener noreferrer">
+              <Button className="bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold text-lg h-14 px-8 rounded-xl">💬 {t("whatsapp", lang)}</Button>
+            </a>
+            <a href="mailto:92sweetflower@gmail.com">
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-slate-900 font-bold text-lg h-14 px-8 rounded-xl">📧 Email Us</Button>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIALS ── */}
+      <section className="py-20 bg-slate-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-14">
+            <Badge className="mb-4 bg-amber-50 text-amber-700 border-amber-200">Reviews</Badge>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">{t("reviews_h", lang)}</h2>
+            <p className="text-slate-600">Trusted by thousands of travelers worldwide.</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              { name: "Anjali Sharma", loc: "New Delhi, India 🇮🇳", text: "The dummy ticket was accepted instantly for my Schengen visa. Saved me so much money and stress!", avatar: "AS", color: "bg-blue-600" },
+              { name: "Kwame Mensah", loc: "Accra, Ghana 🇬🇭", text: "Fast and reliable service. I got my hotel booking in minutes and my UK visa was approved without issues.", avatar: "KM", color: "bg-green-600" },
+              { name: "Elena Rodriguez", loc: "Sao Paulo, Brazil 🇧🇷", text: "Excellent support! They helped me with a custom invitation letter that was perfect for my US visa.", avatar: "ER", color: "bg-purple-600" },
+              { name: "Fatima Al-Rashid", loc: "Dubai, UAE 🇦🇪", text: "Very professional service. Got my flight itinerary within 20 minutes. Highly recommended!", avatar: "FA", color: "bg-amber-600" },
+              { name: "Ravi Kumar", loc: "Mumbai, India 🇮🇳", text: "Used for Canada visa. The team was so helpful on WhatsApp and documents were perfect. Got visa approved!", avatar: "RK", color: "bg-red-600" },
+              { name: "James Osei", loc: "Nairobi, Kenya 🇰🇪", text: "Best service for visa documents. Cheap, fast and embassy-acceptable. Will use again for next trip.", avatar: "JO", color: "bg-indigo-600" },
+            ].map((r, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                <Card className="border-slate-100 shadow-sm hover:shadow-lg transition-all duration-300 h-full">
+                  <CardHeader className="flex flex-row items-center gap-4 pb-3">
+                    <div className={`w-12 h-12 rounded-full ${r.color} flex items-center justify-center text-white font-bold text-sm shrink-0`}>{r.avatar}</div>
+                    <div>
+                      <CardTitle className="text-base">{r.name}</CardTitle>
+                      <CardDescription className="text-xs">{r.loc}</CardDescription>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex text-amber-400 mb-3">{[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}</div>
+                    <p className="text-slate-600 text-sm italic">"{r.text}"</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ── WHY US ── */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-14">
             <Badge className="mb-4 bg-green-50 text-green-700 border-green-200">Why Choose Us</Badge>
-            {/* ✅ FIXED: Was "Mr. Book & Mrs. Fly Advantage" */}
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">The Mr. Book & Fly Advantage</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
@@ -491,7 +693,6 @@ export function Home() {
             ].map((f, i) => <FaqItem key={i} q={f.q} a={f.a} />)}
           </div>
           <div className="mt-10 p-6 bg-amber-50 border border-amber-200 rounded-2xl text-center">
-            {/* ✅ FIXED: Was "Mr. Book & Mrs. Fly" */}
             <p className="text-sm text-amber-800 font-medium">⚠️ Legal Disclaimer: Mr. Book & Fly provides reservation itineraries strictly for visa application purposes. We do not sell actual travel tickets. Purchase real tickets after your visa is approved.</p>
           </div>
         </div>
@@ -516,7 +717,6 @@ export function Home() {
           </div>
         </div>
       </section>
-
     </div>
   )
 }
