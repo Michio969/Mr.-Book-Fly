@@ -17,6 +17,7 @@ import { TermsOfService } from "./pages/TermsOfService"
 import { PrivacyPolicy } from "./pages/PrivacyPolicy"
 import { RefundPolicy } from "./pages/RefundPolicy"
 import OrderForm from "./pages/OrderForm"
+import BlogDummyTicket from "./pages/BlogDummyTicket"
 
 export default function App() {
   return (
@@ -40,6 +41,8 @@ export default function App() {
           <Route path="terms" element={<TermsOfService />} />
           <Route path="privacy" element={<PrivacyPolicy />} />
           <Route path="refund" element={<RefundPolicy />} />
+          {/* ✅ NEW: Blog route added */}
+          <Route path="blog/what-is-dummy-ticket-for-visa" element={<BlogDummyTicket />} />
         </Route>
       </Routes>
     </BrowserRouter>
