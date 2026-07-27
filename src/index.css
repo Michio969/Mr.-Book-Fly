@@ -10,7 +10,7 @@
     overflow: hidden;
   }
 
-  /* Body, subtext, buttons, stats, labels use clean system-ui */
+  /* Body text, pills, buttons, stats, labels use clean system-ui */
   .font-sans-ui {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   }
@@ -44,20 +44,20 @@
   pointer-events: none;
 }
 
-/* Dark mode liquid glass variant */
+/* Dark mode version for liquid glass on light background */
 .liquid-glass-dark {
-  background: rgba(24, 44, 65, 0.05);
-  box-shadow: inset 0 1px 1px rgba(24, 44, 65, 0.2);
+  background: rgba(24, 44, 65, 0.04);
+  box-shadow: inset 0 1px 1px rgba(24, 44, 65, 0.15);
 }
 
 .liquid-glass-dark::before {
   background: linear-gradient(180deg,
-    rgba(24, 44, 65,0.5) 0%, rgba(24, 44, 65,0.2) 20%,
-    rgba(24, 44, 65,0) 40%, rgba(24, 44, 65,0) 60%,
-    rgba(24, 44, 65,0.2) 80%, rgba(24, 44, 65,0.5) 100%);
+    rgba(24, 44, 65, 0.45) 0%, rgba(24, 44, 65, 0.2) 20%,
+    rgba(24, 44, 65, 0) 40%, rgba(24, 44, 65, 0) 60%,
+    rgba(24, 44, 65, 0.2) 80%, rgba(24, 44, 65, 0.45) 100%);
 }
 
-/* Continuous overlay train-bob animation */
+/* Continuous overlay motion ("train-bob") */
 @keyframes trainBob {
   0%, 100% {
     transform: translateY(0px) scale(1.03);
