@@ -63,7 +63,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 }
 
 function createWhatsAppMessage(order: any): string {
-  // ... existing code ...
+  const serviceDetails = order.serviceDetails || '';
 
   return `
 🎯 *NEW BOOKING - Mr. Book & Fly*
