@@ -52,7 +52,8 @@ export function PaymentProcessor({
         // Show success message
         alert(`Order confirmed! Order ID: ${result.orderId}\nRedirecting to WhatsApp...`);
       } else {
-        throw new Error(result.error || 'Failed to process payment');
+        const errMsg = (result as any).error ?? 'Failed to process payment';
+        throw new Error(errMsg);
       }
 
     } catch (error: any) {
