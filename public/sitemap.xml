@@ -32,7 +32,13 @@
   </url>
 
   <url>
-    <loc>https://mrbookandfly.shop/appointment-booking</loc>
+    <loc>https://mrbookandfly.shop/slot-booking</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mrbookandfly.shop/health-insurance</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -89,6 +95,12 @@
     <loc>https://mrbookandfly.shop/refund</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://mrbookandfly.shop/blog/what-is-dummy-ticket-for-visa</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 
 </urlset>

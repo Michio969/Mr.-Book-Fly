@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { motion } from "motion/react"
+import { useSEO } from "@/lib/seo"
 
 const WHATSAPP_NUMBER = "447877679344"
 
@@ -151,6 +152,12 @@ const badgeMap: Record<string, string> = {
 }
 
 export default function ValuableDeals() {
+  useSEO({
+    title: "Valuable Deals & Visa Plans",
+    description: "Complete visa document packages at fixed prices. Flight reservation, hotel booking, and insurance bundled together. Embassy fees not included.",
+    path: "/valuable-deals",
+  })
+
   return (
     <div className="min-h-screen bg-slate-50 py-12">
       <div className="container mx-auto px-4">

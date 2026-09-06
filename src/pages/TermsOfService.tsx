@@ -1,6 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card"
+import { useSEO } from "@/lib/seo"
 
 export function TermsOfService() {
+  useSEO({
+    title: "Terms of Service",
+    description: "Read the terms of service governing your use of Mr. Book & Fly's website and visa documentation services.",
+    path: "/terms",
+  })
+
   return (
     <div className="min-h-screen bg-slate-50 py-12">
       <div className="container mx-auto px-4 max-w-4xl">

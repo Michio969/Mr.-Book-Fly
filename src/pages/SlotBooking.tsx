@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { CalendarCheck, MessageCircle, Globe, Clock, CheckCircle, AlertCircle, ChevronDown, ChevronUp } from "lucide-react";
+import { useSEO } from "@/lib/seo";
 
 const COUNTRIES = [
   "Schengen Area (Europe)", "United Kingdom", "United States of America", "Canada",
@@ -40,6 +41,12 @@ const FAQS = [
 ];
 
 export default function SlotBookingPage() {
+  useSEO({
+    title: "Visa & Embassy Slot Booking",
+    description: "Book priority visa and embassy appointment slots across major countries. Real-time availability assistance for VFS Global, biometric, and embassy visits.",
+    path: "/slot-booking",
+  });
+
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedType, setSelectedType] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(null);

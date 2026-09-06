@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Building, Calendar as CalendarIcon, Users, CheckCircle2, ShieldCheck, MapPin, MessageCircle } from "lucide-react"
 import { toast } from "sonner"
+import { useSEO } from "@/lib/seo"
 
 const WHATSAPP_NUMBER = "447877679344"
 
@@ -190,6 +191,13 @@ const WORLD_CITIES = [
 ]
 
 export function HotelBooking() {
+  useSEO({
+    title: "Dummy Hotel Booking for Visa",
+    description: "Get a verifiable hotel reservation for your destination country. 100% safe for embassy checks, delivered instantly as a PDF.",
+    path: "/hotel-booking",
+    keywords: "dummy hotel booking, hotel booking for visa, confirmed hotel reservation for visa",
+  })
+
   const [step, setStep] = useState(1) // 1=form, 2=whatsapp confirm
   const [orderId, setOrderId] = useState("")
   const [citySearch, setCitySearch] = useState("")

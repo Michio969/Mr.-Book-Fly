@@ -7,6 +7,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Plane, Calendar as CalendarIcon, Users, CheckCircle2, ShieldCheck, Heart, MessageCircle } from "lucide-react"
 import { motion } from "motion/react"
 import { toast } from "sonner"
+import { useSEO } from "@/lib/seo"
 
 const WHATSAPP_NUMBER = "447877679344"
 
@@ -330,6 +331,13 @@ const INSURANCE_RATE_USD = 4
 const INSURANCE_RATE_INR = 499
 
 export function FlightReservation() {
+  useSEO({
+    title: "Dummy Flight Ticket & Reservation for Visa",
+    description: "Get a verifiable flight itinerary with a valid PNR for Schengen, UK, US, and Canada visa applications. Embassy-acceptable, delivered in 30 minutes.",
+    path: "/flight-reservation",
+    keywords: "dummy flight ticket, flight reservation for visa, dummy ticket for visa, onward ticket",
+  })
+
   const [tripType, setTripType] = useState("round-trip")
   const [step, setStep] = useState(1) // 1=form, 2=whatsapp confirm
   const [orderId, setOrderId] = useState("")

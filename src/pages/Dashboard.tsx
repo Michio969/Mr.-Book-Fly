@@ -3,8 +3,16 @@ import { FileText, Download, Clock, CheckCircle2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { useSEO } from "@/lib/seo"
 
 export function Dashboard() {
+  useSEO({
+    title: "Dashboard",
+    description: "View and manage your bookings and documents.",
+    path: "/dashboard",
+    noindex: true,
+  })
+
   const orders = [
     {
       id: "ORD-98234",

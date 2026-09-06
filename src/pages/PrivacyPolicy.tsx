@@ -1,6 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card"
+import { useSEO } from "@/lib/seo"
 
 export function PrivacyPolicy() {
+  useSEO({
+    title: "Privacy Policy",
+    description: "Read Mr. Book & Fly's privacy policy to understand how we collect, use, and protect your personal information.",
+    path: "/privacy",
+  })
+
   return (
     <div className="min-h-screen bg-slate-50 py-12">
       <div className="container mx-auto px-4 max-w-4xl">

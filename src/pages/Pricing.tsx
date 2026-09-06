@@ -2,8 +2,15 @@ import { CheckCircle2, ShieldCheck, Plane, Building, Ticket, Heart, Clock } from
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Link } from "react-router-dom"
+import { useSEO } from "@/lib/seo"
 
 export function Pricing() {
+  useSEO({
+    title: "Pricing",
+    description: "Transparent pricing for dummy flight tickets, hotel bookings, and visa documents. Plans starting at $3. No hidden fees, instant PDF delivery.",
+    path: "/pricing",
+  })
+
   const flightPlans = [
     { label: "24–36 Hours", price_usd: "$3", price_inr: "₹299", features: ["Verifiable Flight Itinerary", "Valid PNR Code", "Instant PDF Delivery", "24–36 hr validity", "Email Support"] },
     { label: "96 Hours", price_usd: "$9", price_inr: "₹999", features: ["Verifiable Flight Itinerary", "Valid PNR Code", "Instant PDF Delivery", "4 Day validity", "Priority Support"], popular: true },

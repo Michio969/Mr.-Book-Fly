@@ -1,8 +1,15 @@
 import { ShieldCheck, Users, Globe, Award, MessageCircle } from "lucide-react"
 import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
+import { useSEO } from "@/lib/seo"
 
 export function AboutUs() {
+  useSEO({
+    title: "About Us",
+    description: "Learn about Mr. Book & Fly, trusted by 10,000+ customers for embassy-acceptable dummy flight tickets and hotel bookings for visa applications worldwide.",
+    path: "/about",
+  })
+
   return (
     <div className="min-h-screen bg-slate-50 py-20">
       <div className="container mx-auto px-4 max-w-4xl">

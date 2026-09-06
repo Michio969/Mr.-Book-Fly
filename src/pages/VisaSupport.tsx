@@ -1,8 +1,15 @@
 import { CheckCircle2, FileText, Globe, ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
+import { useSEO } from "@/lib/seo"
 
 export function VisaSupport() {
+  useSEO({
+    title: "Visa Support Services",
+    description: "Comprehensive visa support including Schengen, UK, US, and Canada visa specialists. Embassy-acceptable documentation and expert application guidance.",
+    path: "/visa-support",
+  })
+
   return (
     <div className="min-h-screen bg-slate-50 py-20">
       <div className="container mx-auto px-4 max-w-5xl">

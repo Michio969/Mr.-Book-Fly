@@ -1,6 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card"
+import { useSEO } from "@/lib/seo"
 
 export function RefundPolicy() {
+  useSEO({
+    title: "Refund Policy",
+    description: "Understand Mr. Book & Fly's refund and cancellation policy for dummy tickets, hotel bookings, and visa document services.",
+    path: "/refund",
+  })
+
   return (
     <div className="min-h-screen bg-slate-50 py-12">
       <div className="container mx-auto px-4 max-w-4xl">

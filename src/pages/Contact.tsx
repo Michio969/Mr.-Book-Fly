@@ -3,8 +3,15 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { useSEO } from "@/lib/seo"
 
 export function Contact() {
+  useSEO({
+    title: "Contact Us",
+    description: "Get in touch with Mr. Book & Fly for questions about dummy flight tickets, hotel bookings, and visa documentation support. Available 24/7 via WhatsApp.",
+    path: "/contact",
+  })
+
   return (
     <div className="min-h-screen bg-slate-50 py-20">
       <div className="container mx-auto px-4 max-w-6xl">

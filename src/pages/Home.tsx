@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { toast } from "sonner"
+import { useSEO } from "@/lib/seo"
 
 // ─── TRANSLATIONS ────────────────────────────────────────────────
 const LANGUAGE_GROUPS = [
@@ -318,6 +319,13 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 // ─── MAIN HOME ────────────────────────────────────────────────
 export function Home() {
+  useSEO({
+    title: "Mr. Book & Fly | Dummy Flight Tickets & Hotel Bookings for Visa",
+    description: "Get 100% embassy-acceptable dummy flight tickets, hotel bookings and visa documents in 30 minutes. Trusted by 10,000+ customers worldwide. Schengen, UK, US, Canada visa support.",
+    path: "/",
+    noSuffix: true,
+  })
+
   const [lang, setLang] = useState("en")
   const [showLangMenu, setShowLangMenu] = useState(false)
 

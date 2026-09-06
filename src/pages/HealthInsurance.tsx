@@ -1,5 +1,6 @@
 import { useState, useMemo } from "react";
 import { Shield, CheckCircle, AlertCircle, ChevronDown, ChevronUp, MessageCircle } from "lucide-react";
+import { useSEO } from "@/lib/seo";
 
 const WHATSAPP_NUMBER = "447877679344";
 
@@ -79,6 +80,12 @@ const FAQS = [
 ];
 
 export default function HealthInsurancePage() {
+  useSEO({
+    title: "Travel Health Insurance for Visa",
+    description: "Comprehensive travel insurance documents accepted by Schengen, UK, US, Canada, and worldwide embassies. Get your confirmation within 30 minutes.",
+    path: "/health-insurance",
+  });
+
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [step, setStep] = useState<"plans" | "details" | "confirm">("plans");
   const [openFaq, setOpenFaq] = useState<number | null>(null);

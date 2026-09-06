@@ -7,8 +7,15 @@ import { Users, CheckCircle2, ShieldCheck, Mail } from "lucide-react"
 import { toast } from "sonner"
 import { generatePDF } from "@/lib/api"
 import { PaymentModal } from "@/components/PaymentModal"
+import { useSEO } from "@/lib/seo"
 
 export function InvitationLetter() {
+  useSEO({
+    title: "Invitation Letter for Visa",
+    description: "Professionally drafted invitation letters for tourist, business, and family visa applications. Fast turnaround, embassy-acceptable formatting.",
+    path: "/invitation-letter",
+  })
+
   const [isGenerating, setIsGenerating] = useState(false)
   const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false)
   const [formData, setFormData] = useState({

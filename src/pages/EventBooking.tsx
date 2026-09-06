@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Calendar as CalendarIcon, Users, CheckCircle2, ShieldCheck, Ticket, MessageCircle } from "lucide-react"
 import { toast } from "sonner"
+import { useSEO } from "@/lib/seo"
 
 const WHATSAPP_NUMBER = "447877679344"
 
@@ -17,6 +18,12 @@ const generateOrderId = () => {
 }
 
 export function EventBooking() {
+  useSEO({
+    title: "Event Booking for Visa",
+    description: "Get verifiable event tickets (concerts, exhibitions, festivals) to prove the purpose of your visit for visa applications. Instant PDF delivery.",
+    path: "/event-booking",
+  })
+
   const [step, setStep] = useState<"form" | "confirm">("form")
   const [orderId] = useState(generateOrderId())
   const [formData, setFormData] = useState({

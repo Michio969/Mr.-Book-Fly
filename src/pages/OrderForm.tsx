@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Card } from '@/components/ui/card';
 import { Plus, Trash2, User } from 'lucide-react';
 import { processOrder, validateUPIReference } from '@/lib/api';
+import { useSEO } from '@/lib/seo';
 
 interface Traveler {
   id: string;
@@ -25,6 +26,12 @@ const SERVICE_OPTIONS = [
 ];
 
 export default function OrderForm() {
+  useSEO({
+    title: "Quick Order Form",
+    description: "Order your dummy flight ticket, hotel booking, or visa document in minutes. Fast, secure checkout with instant PDF delivery.",
+    path: "/order-form",
+  });
+
   const [travelers, setTravelers] = useState<Traveler[]>([
     {
       id: '1',
